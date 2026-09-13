@@ -1,0 +1,2008 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Admin Dashboard | Jhalawar Organic Milk"
+    >
+
+    <meta
+        name="theme-color"
+        content="#234630"
+    >
+
+    <title>
+        Admin Dashboard | Jhalawar Organic Milk
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="admin-dashboard.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ======================================================
+     ADMIN HEADER
+======================================================= -->
+
+<header class="admin-header">
+
+    <div class="admin-brand">
+
+        <div class="admin-logo">
+            🥛
+        </div>
+
+        <div>
+
+            <strong>
+                Jhalawar Organic Milk
+            </strong>
+
+            <span>
+                Admin Panel
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <button
+        type="button"
+        id="logout-button"
+        class="logout-button"
+    >
+        Logout
+    </button>
+
+</header>
+
+
+
+<!-- ======================================================
+     ADMIN LAYOUT
+======================================================= -->
+
+<div class="admin-layout">
+
+
+    <!-- ==================================================
+         SIDEBAR
+    =================================================== -->
+
+    <aside class="admin-sidebar">
+
+        <nav>
+
+            <a
+                href="#dashboard"
+                class="sidebar-link active"
+            >
+                🏠 Dashboard
+            </a>
+
+
+            <a
+                href="#business"
+                class="sidebar-link"
+            >
+                🏪 Business Details
+            </a>
+
+
+            <a
+                href="#products"
+                class="sidebar-link"
+            >
+                🥛 Products
+            </a>
+
+
+            <a
+                href="#delivery"
+                class="sidebar-link"
+            >
+                🚚 Delivery
+            </a>
+
+
+            <a
+                href="#subscription"
+                class="sidebar-link"
+            >
+                📦 Subscription
+            </a>
+
+
+            <a
+                href="#payment"
+                class="sidebar-link"
+            >
+                💳 Payment
+            </a>
+
+
+            <a
+                href="#offers"
+                class="sidebar-link"
+            >
+                🎁 Offers
+            </a>
+
+
+            <a
+                href="#images"
+                class="sidebar-link"
+            >
+                🖼️ Images
+            </a>
+
+
+            <a
+                href="#seo"
+                class="sidebar-link"
+            >
+                🔍 SEO
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- ==================================================
+         MAIN ADMIN AREA
+    =================================================== -->
+
+    <main class="admin-main">
+
+
+        <!-- =================================================
+             DASHBOARD
+        ================================================== -->
+
+        <section
+            id="dashboard"
+            class="admin-section"
+        >
+
+            <div class="dashboard-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        ADMIN DASHBOARD
+                    </span>
+
+                    <h1>
+                        Welcome Back 👋
+                    </h1>
+
+                    <p>
+                        Manage your website and business
+                        information from one place.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- STATUS CARDS -->
+
+            <div class="status-grid">
+
+
+                <div class="status-card">
+
+                    <span class="status-icon">
+                        🥛
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Products
+                        </strong>
+
+                        <span>
+                            Milk, Dahi & Chhach
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="status-card">
+
+                    <span class="status-icon">
+                        🚚
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Delivery
+                        </strong>
+
+                        <span>
+                            6 AM – 12 PM
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="status-card">
+
+                    <span class="status-icon">
+                        📱
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            WhatsApp
+                        </strong>
+
+                        <span>
+                            8890017418
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="status-card">
+
+                    <span class="status-icon">
+                        💰
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Delivery Charge
+                        </strong>
+
+                        <span>
+                            ₹0
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             BUSINESS DETAILS
+        ================================================== -->
+
+        <section
+            id="business"
+            class="admin-section"
+        >
+
+
+            <div class="section-title">
+
+                <span class="eyebrow">
+                    BUSINESS
+                </span>
+
+                <h2>
+                    Business Details
+                </h2>
+
+                <p>
+                    Update the information shown on the
+                    customer website.
+                </p>
+
+            </div>
+
+
+
+            <div class="admin-card">
+
+
+                <div class="form-grid">
+
+
+                    <!-- BUSINESS NAME -->
+
+                    <div class="form-group">
+
+                        <label for="business-name">
+                            Business Name
+                        </label>
+
+                        <input
+                            id="business-name"
+                            type="text"
+                            value="Jhalawar Pure & Fresh Organic Milk"
+                        >
+
+                    </div>
+
+
+
+                    <!-- BRAND NAME -->
+
+                    <div class="form-group">
+
+                        <label for="brand-name">
+                            Brand Name
+                        </label>
+
+                        <input
+                            id="brand-name"
+                            type="text"
+                            value="Jhalawar Organic Milk"
+                        >
+
+                    </div>
+
+
+
+                    <!-- OWNER -->
+
+                    <div class="form-group">
+
+                        <label for="owner-name">
+                            Owner Name
+                        </label>
+
+                        <input
+                            id="owner-name"
+                            type="text"
+                            value="Bhupendra Gurjar"
+                        >
+
+                    </div>
+
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-group">
+
+                        <label for="phone-number">
+                            Phone Number
+                        </label>
+
+                        <input
+                            id="phone-number"
+                            type="tel"
+                            value="8890017418"
+                        >
+
+                    </div>
+
+
+
+                    <!-- WHATSAPP -->
+
+                    <div class="form-group">
+
+                        <label for="whatsapp-number">
+                            WhatsApp Number
+                        </label>
+
+                        <input
+                            id="whatsapp-number"
+                            type="tel"
+                            value="8890017418"
+                        >
+
+                    </div>
+
+
+
+                    <!-- INSTAGRAM -->
+
+                    <div class="form-group">
+
+                        <label for="instagram-url">
+                            Instagram URL
+                        </label>
+
+                        <input
+                            id="instagram-url"
+                            type="url"
+                            value="https://www.instagram.com/jhalawarorganicmilk/"
+                        >
+
+                    </div>
+
+
+
+                    <!-- ADDRESS -->
+
+                    <div class="form-group full">
+
+                        <label for="shop-address">
+                            Shop Address
+                        </label>
+
+                        <textarea
+                            id="shop-address"
+                            rows="4"
+                        >Jhalrapatan, Jhalawar, Rajasthan</textarea>
+
+                    </div>
+
+
+
+                    <!-- GOOGLE MAPS -->
+
+                    <div class="form-group full">
+
+                        <label for="google-maps">
+                            Google Maps Link
+                        </label>
+
+                        <input
+                            id="google-maps"
+                            type="url"
+                            placeholder="Paste Google Maps link"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="card-actions">
+
+                    <button
+                        type="button"
+                        class="save-button"
+                        id="save-business"
+                    >
+                        Save Business Details
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+        <!-- ======================================================
+     PRODUCTS
+======================================================= -->
+
+<section
+    id="products"
+    class="admin-section"
+>
+
+
+    <div class="section-title">
+
+        <span class="eyebrow">
+            PRODUCTS
+        </span>
+
+        <h2>
+            Manage Products
+        </h2>
+
+        <p>
+            Manage product prices, quantities and
+            available dairy products.
+        </p>
+
+    </div>
+
+
+
+    <div class="product-admin-grid">
+
+
+        <!-- =================================================
+             MILK
+        ================================================== -->
+
+        <article
+            class="admin-product-card"
+            data-product="milk"
+        >
+
+            <div class="product-admin-header">
+
+                <span>
+                    🥛
+                </span>
+
+                <div>
+
+                    <h3>
+                        Fresh Milk
+                    </h3>
+
+                    <p>
+                        Cow Milk & Buffalo Milk
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- COW MILK -->
+
+            <div class="form-group">
+
+                <label for="cow-milk-price">
+                    Cow Milk Price (₹ / L)
+                </label>
+
+                <input
+                    id="cow-milk-price"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="65"
+                    placeholder="65"
+                >
+
+            </div>
+
+
+
+            <!-- BUFFALO MILK -->
+
+            <div class="form-group">
+
+                <label for="buffalo-milk-price">
+                    Buffalo Milk Price (₹ / L)
+                </label>
+
+                <input
+                    id="buffalo-milk-price"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="75"
+                    placeholder="75"
+                >
+
+            </div>
+
+
+
+            <!-- DEFAULT PRODUCT PRICE -->
+
+            <div class="form-group">
+
+                <label for="milk-price">
+                    Default Milk Price
+                </label>
+
+                <input
+                    id="milk-price"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="65"
+                    placeholder="65"
+                >
+
+            </div>
+
+
+
+            <!-- QUANTITIES -->
+
+            <div class="form-group">
+
+                <label for="milk-quantities">
+                    Quantities
+                </label>
+
+                <input
+                    id="milk-quantities"
+                    type="text"
+                    value="500 ml, 1 Litre, 2 Litres"
+                >
+
+                <small>
+                    Separate quantities with commas.
+                </small>
+
+            </div>
+
+
+
+            <button
+                type="button"
+                class="save-button"
+            >
+                Save Milk
+            </button>
+
+        </article>
+
+
+
+        <!-- =================================================
+             DAHI
+        ================================================== -->
+
+        <article
+            class="admin-product-card"
+            data-product="curd"
+        >
+
+            <div class="product-admin-header">
+
+                <span>
+                    🥣
+                </span>
+
+                <div>
+
+                    <h3>
+                        Fresh Dahi
+                    </h3>
+
+                    <p>
+                        Fresh Curd
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="curd-price">
+                    Price (₹ / Kg)
+                </label>
+
+                <input
+                    id="curd-price"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="120"
+                    placeholder="120"
+                >
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="curd-quantities">
+                    Quantities
+                </label>
+
+                <input
+                    id="curd-quantities"
+                    type="text"
+                    value="250 g, 500 g, 1 Kg"
+                >
+
+            </div>
+
+
+
+            <button
+                type="button"
+                class="save-button"
+            >
+                Save Dahi
+            </button>
+
+        </article>
+
+
+
+        <!-- =================================================
+             CHHACH
+        ================================================== -->
+
+        <article
+            class="admin-product-card"
+            data-product="buttermilk"
+        >
+
+            <div class="product-admin-header">
+
+                <span>
+                    🥛
+                </span>
+
+                <div>
+
+                    <h3>
+                        Fresh Chhach
+                    </h3>
+
+                    <p>
+                        Fresh Buttermilk
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="buttermilk-price">
+                    Price (₹ / L)
+                </label>
+
+                <input
+                    id="buttermilk-price"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="30"
+                    placeholder="30"
+                >
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="buttermilk-quantities">
+                    Quantities
+                </label>
+
+                <input
+                    id="buttermilk-quantities"
+                    type="text"
+                    value="250 ml, 500 ml, 1 Litre"
+                >
+
+            </div>
+
+
+
+            <button
+                type="button"
+                class="save-button"
+            >
+                Save Chhach
+            </button>
+
+        </article>
+
+
+
+        <!-- =================================================
+             GHEE
+        ================================================== -->
+
+        <article
+            class="admin-product-card"
+            data-product="ghee"
+        >
+
+            <div class="product-admin-header">
+
+                <span>
+                    🧈
+                </span>
+
+                <div>
+
+                    <h3>
+                        Pure Desi Ghee
+                    </h3>
+
+                    <p>
+                        Cow Ghee & Buffalo Ghee
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- COW GHEE -->
+
+            <div class="form-group">
+
+                <label for="ghee-cow-price">
+                    Cow Ghee Price (₹ / Kg)
+                </label>
+
+                <input
+                    id="ghee-cow-price"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="1499"
+                    placeholder="1499"
+                >
+
+            </div>
+
+
+
+            <!-- BUFFALO GHEE -->
+
+            <div class="form-group">
+
+                <label for="ghee-buffalo-price">
+                    Buffalo Ghee Price (₹ / Kg)
+                </label>
+
+                <input
+                    id="ghee-buffalo-price"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="1299"
+                    placeholder="1299"
+                >
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="ghee-quantities">
+                    Quantities
+                </label>
+
+                <input
+                    id="ghee-quantities"
+                    type="text"
+                    value="250 g, 500 g, 1 Kg"
+                >
+
+            </div>
+
+
+
+            <button
+                type="button"
+                class="save-button"
+                data-product-save="ghee"
+            >
+                Save Ghee
+            </button>
+
+        </article>
+
+
+
+        <!-- =================================================
+             MAWA
+        ================================================== -->
+
+        <article
+            class="admin-product-card"
+            data-product="mawa"
+        >
+
+            <div class="product-admin-header">
+
+                <span>
+                    🥛
+                </span>
+
+                <div>
+
+                    <h3>
+                        Fresh Mawa
+                    </h3>
+
+                    <p>
+                        Fresh Dairy Product
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="mawa-price">
+                    Price (₹ / Kg)
+                </label>
+
+                <input
+                    id="mawa-price"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="450"
+                    placeholder="450"
+                >
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="mawa-quantities">
+                    Quantities
+                </label>
+
+                <input
+                    id="mawa-quantities"
+                    type="text"
+                    value="250 g, 500 g, 1 Kg"
+                >
+
+            </div>
+
+
+
+            <button
+                type="button"
+                class="save-button"
+                data-product-save="mawa"
+            >
+                Save Mawa
+            </button>
+
+        </article>
+
+
+    </div>
+
+
+</section>
+<!-- ======================================================
+     DELIVERY
+======================================================= -->
+
+<section
+    id="delivery"
+    class="admin-section"
+>
+
+
+    <div class="section-title">
+
+        <span class="eyebrow">
+            DELIVERY
+        </span>
+
+        <h2>
+            Delivery Settings
+        </h2>
+
+        <p>
+            Manage delivery timing, delivery charge
+            and delivery areas.
+        </p>
+
+    </div>
+
+
+
+    <div class="admin-card">
+
+
+        <div class="form-grid">
+
+
+            <!-- DELIVERY START -->
+
+            <div class="form-group">
+
+                <label for="delivery-start">
+                    Start Time
+                </label>
+
+                <input
+                    id="delivery-start"
+                    type="time"
+                    value="06:00"
+                >
+
+            </div>
+
+
+
+            <!-- DELIVERY END -->
+
+            <div class="form-group">
+
+                <label for="delivery-end">
+                    End Time
+                </label>
+
+                <input
+                    id="delivery-end"
+                    type="time"
+                    value="12:00"
+                >
+
+            </div>
+
+
+
+            <!-- DELIVERY CHARGE -->
+
+            <div class="form-group">
+
+                <label for="delivery-charge">
+                    Delivery Charge (₹)
+                </label>
+
+                <input
+                    id="delivery-charge"
+                    type="number"
+                    min="0"
+                    step="1"
+                    value="0"
+                >
+
+            </div>
+
+
+
+            <!-- DELIVERY AREAS -->
+
+            <div class="form-group full">
+
+                <label for="delivery-areas">
+                    Delivery Areas
+                </label>
+
+                <textarea
+                    id="delivery-areas"
+                    rows="5"
+                    placeholder="Enter one area per line"
+                ></textarea>
+
+                <small>
+                    Add one delivery area on each line.
+                </small>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="card-actions">
+
+            <button
+                type="button"
+                class="save-button"
+            >
+                Save Delivery Settings
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ======================================================
+     SUBSCRIPTION
+======================================================= -->
+
+<section
+    id="subscription"
+    class="admin-section"
+>
+
+
+    <div class="section-title">
+
+        <span class="eyebrow">
+            SUBSCRIPTION
+        </span>
+
+        <h2>
+            Subscription Settings
+        </h2>
+
+        <p>
+            Manage the monthly milk subscription
+            available to customers.
+        </p>
+
+    </div>
+
+
+
+    <div class="admin-card">
+
+
+        <!-- ENABLE / DISABLE -->
+
+        <div class="toggle-row">
+
+            <div>
+
+                <strong>
+                    Monthly Subscription
+                </strong>
+
+                <p>
+                    Allow customers to start
+                    monthly milk plans.
+                </p>
+
+            </div>
+
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="subscription-enabled"
+                    checked
+                >
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+
+
+        <!-- DEFAULT DAYS -->
+
+        <div class="form-group">
+
+            <label for="subscription-days">
+                Default Number of Days
+            </label>
+
+            <input
+                id="subscription-days"
+                type="number"
+                value="30"
+                min="1"
+                max="31"
+            >
+
+        </div>
+
+
+
+        <div class="form-group">
+
+            <label>
+                Available Daily Quantities
+            </label>
+
+            <input
+                type="text"
+                value="500 ml, 1 Litre, 2 Litres"
+                readonly
+            >
+
+        </div>
+
+
+
+        <div class="card-actions">
+
+            <button
+                type="button"
+                class="save-button"
+            >
+                Save Subscription
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ======================================================
+     PAYMENT
+======================================================= -->
+
+<section
+    id="payment"
+    class="admin-section"
+>
+
+
+    <div class="section-title">
+
+        <span class="eyebrow">
+            PAYMENT
+        </span>
+
+        <h2>
+            Payment Details
+        </h2>
+
+        <p>
+            Add the payment number and UPI ID
+            customers should use for payment.
+        </p>
+
+    </div>
+
+
+
+    <div class="admin-card">
+
+
+        <div class="form-grid">
+
+
+            <!-- PAYMENT NUMBER -->
+
+            <div class="form-group">
+
+                <label for="payment-number">
+                    Payment Number
+                </label>
+
+                <input
+                    id="payment-number"
+                    type="tel"
+                    placeholder="Enter payment number"
+                >
+
+            </div>
+
+
+
+            <!-- UPI -->
+
+            <div class="form-group">
+
+                <label for="upi-id">
+                    UPI ID
+                </label>
+
+                <input
+                    id="upi-id"
+                    type="text"
+                    placeholder="example@upi"
+                >
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="card-actions">
+
+            <button
+                type="button"
+                class="save-button"
+            >
+                Save Payment Details
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+<!-- ======================================================
+     OFFERS
+======================================================= -->
+
+<section
+    id="offers"
+    class="admin-section"
+>
+
+
+    <div class="section-title">
+
+        <span class="eyebrow">
+            OFFERS
+        </span>
+
+        <h2>
+            Manage Offers
+        </h2>
+
+        <p>
+            Update referral and free trial offers
+            shown on the customer website.
+        </p>
+
+    </div>
+
+
+
+    <div class="offers-admin-grid">
+
+
+        <!-- =================================================
+             REFERRAL OFFER
+        ================================================== -->
+
+        <article class="admin-card">
+
+            <h3>
+                New Customer Referral
+            </h3>
+
+
+            <div class="form-group">
+
+                <label for="referral-offer">
+                    Offer Description
+                </label>
+
+                <textarea
+                    id="referral-offer"
+                    rows="4"
+                >Get 1 litre milk free on every new customer referral.</textarea>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="save-button"
+            >
+                Save Referral Offer
+            </button>
+
+        </article>
+
+
+
+        <!-- =================================================
+             TRIAL OFFER
+        ================================================== -->
+
+        <article class="admin-card">
+
+            <h3>
+                Free Trial Sample
+            </h3>
+
+
+            <div class="form-group">
+
+                <label for="trial-offer">
+                    Offer Description
+                </label>
+
+                <textarea
+                    id="trial-offer"
+                    rows="4"
+                >Free 200 ml sample for 2 days.</textarea>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="save-button"
+            >
+                Save Trial Offer
+            </button>
+
+        </article>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ======================================================
+     IMAGES
+======================================================= -->
+
+<section
+    id="images"
+    class="admin-section"
+>
+
+
+    <div class="section-title">
+
+        <span class="eyebrow">
+            IMAGES
+        </span>
+
+        <h2>
+            Website Images
+        </h2>
+
+        <p>
+            Select images to replace website visuals.
+        </p>
+
+    </div>
+
+
+
+    <div class="image-admin-grid">
+
+
+        <!-- =================================================
+             1. LOGO
+             FILE: logo.png
+        ================================================== -->
+
+        <div
+            class="image-upload-card"
+            data-image-key="logo"
+        >
+
+            <div
+                class="image-preview"
+                data-image-preview="logo"
+            >
+                Logo
+            </div>
+
+            <h3>
+                Logo
+            </h3>
+
+            <input
+                type="file"
+                accept="image/*"
+                data-image-input="logo"
+            >
+
+            <small>
+                File name: logo.png
+            </small>
+
+        </div>
+
+
+
+        <!-- =================================================
+             2. HERO
+             FILE: hero.jpg
+        ================================================== -->
+
+        <div
+            class="image-upload-card"
+            data-image-key="hero"
+        >
+
+            <div
+                class="image-preview"
+                data-image-preview="hero"
+            >
+                Hero
+            </div>
+
+            <h3>
+                Hero Image
+            </h3>
+
+            <input
+                type="file"
+                accept="image/*"
+                data-image-input="hero"
+            >
+
+            <small>
+                File name: hero.jpg
+            </small>
+
+        </div>
+
+
+
+        <!-- =================================================
+             3. MILK
+             FILE: milk.jpg
+        ================================================== -->
+
+        <div
+            class="image-upload-card"
+            data-image-key="milk"
+        >
+
+            <div
+                class="image-preview"
+                data-image-preview="milk"
+            >
+                Milk
+            </div>
+
+            <h3>
+                Milk Image
+            </h3>
+
+            <input
+                type="file"
+                accept="image/*"
+                data-image-input="milk"
+            >
+
+            <small>
+                File name: milk.jpg
+            </small>
+
+        </div>
+
+
+
+        <!-- =================================================
+             4. CURD
+             FILE: curd.jpg
+        ================================================== -->
+
+        <div
+            class="image-upload-card"
+            data-image-key="curd"
+        >
+
+            <div
+                class="image-preview"
+                data-image-preview="curd"
+            >
+                Curd
+            </div>
+
+            <h3>
+                Curd / Dahi Image
+            </h3>
+
+            <input
+                type="file"
+                accept="image/*"
+                data-image-input="curd"
+            >
+
+            <small>
+                File name: curd.jpg
+            </small>
+
+        </div>
+
+
+
+        <!-- =================================================
+             5. BUTTERMILK
+             FILE: buttermilk.jpg
+        ================================================== -->
+
+        <div
+            class="image-upload-card"
+            data-image-key="buttermilk"
+        >
+
+            <div
+                class="image-preview"
+                data-image-preview="buttermilk"
+            >
+                Buttermilk
+            </div>
+
+            <h3>
+                Buttermilk / Chhach Image
+            </h3>
+
+            <input
+                type="file"
+                accept="image/*"
+                data-image-input="buttermilk"
+            >
+
+            <small>
+                File name: buttermilk.jpg
+            </small>
+
+        </div>
+
+
+
+        <!-- =================================================
+             6. GHEE
+             FILE: ghee.jpg
+        ================================================== -->
+
+        <div
+            class="image-upload-card"
+            data-image-key="ghee"
+        >
+
+            <div
+                class="image-preview"
+                data-image-preview="ghee"
+            >
+                Ghee
+            </div>
+
+            <h3>
+                Ghee Image
+            </h3>
+
+            <input
+                type="file"
+                accept="image/*"
+                data-image-input="ghee"
+            >
+
+            <small>
+                File name: ghee.jpg
+            </small>
+
+        </div>
+
+
+
+        <!-- =================================================
+             7. BOTTLE
+             FILE: bottle.jpg
+        ================================================== -->
+
+        <div
+            class="image-upload-card"
+            data-image-key="bottle"
+        >
+
+            <div
+                class="image-preview"
+                data-image-preview="bottle"
+            >
+                Bottle
+            </div>
+
+            <h3>
+                Glass Bottle Image
+            </h3>
+
+            <input
+                type="file"
+                accept="image/*"
+                data-image-input="bottle"
+            >
+
+            <small>
+                File name: bottle.jpg
+            </small>
+
+        </div>
+
+
+
+        <!-- =================================================
+             8. BRAND BANNER
+             FILE: brand-banner.jpg
+        ================================================== -->
+
+        <div
+            class="image-upload-card"
+            data-image-key="brandBanner"
+        >
+
+            <div
+                class="image-preview"
+                data-image-preview="brandBanner"
+            >
+                Brand Banner
+            </div>
+
+            <h3>
+                Brand Banner
+            </h3>
+
+            <input
+                type="file"
+                accept="image/*"
+                data-image-input="brandBanner"
+            >
+
+            <small>
+                File name: brand-banner.jpg
+            </small>
+
+        </div>
+
+
+
+        <!-- =================================================
+             9. DELIVERY BANNER
+             FILE: delivery-banner.jpg
+        ================================================== -->
+
+        <div
+            class="image-upload-card"
+            data-image-key="deliveryBanner"
+        >
+
+            <div
+                class="image-preview"
+                data-image-preview="deliveryBanner"
+            >
+                Delivery Banner
+            </div>
+
+            <h3>
+                Delivery Banner
+            </h3>
+
+            <input
+                type="file"
+                accept="image/*"
+                data-image-input="deliveryBanner"
+            >
+
+            <small>
+                File name: delivery-banner.jpg
+            </small>
+
+        </div>
+
+
+
+        <!-- =================================================
+             10. BRAND BANNER 2
+             FILE: brand-banner-2.jpg
+        ================================================== -->
+
+        <div
+            class="image-upload-card"
+            data-image-key="brandBanner2"
+        >
+
+            <div
+                class="image-preview"
+                data-image-preview="brandBanner2"
+            >
+                Brand Banner 2
+            </div>
+
+            <h3>
+                Second Brand Banner
+            </h3>
+
+            <input
+                type="file"
+                accept="image/*"
+                data-image-input="brandBanner2"
+            >
+
+            <small>
+                File name: brand-banner-2.jpg
+            </small>
+
+        </div>
+
+
+
+        <!-- =================================================
+             11. OWNER
+             FILE: owner.jpg
+        ================================================== -->
+
+        <div
+            class="image-upload-card"
+            data-image-key="owner"
+        >
+
+            <div
+                class="image-preview"
+                data-image-preview="owner"
+            >
+                Owner
+            </div>
+
+            <h3>
+                Owner Image
+            </h3>
+
+            <input
+                type="file"
+                accept="image/*"
+                data-image-input="owner"
+            >
+
+            <small>
+                File name: owner.jpg
+            </small>
+
+        </div>
+
+
+
+        <!-- =================================================
+             12. MAWA
+             FILE: mawa.jpg
+        ================================================== -->
+
+        <div
+            class="image-upload-card"
+            data-image-key="mawa"
+        >
+
+            <div
+                class="image-preview"
+                data-image-preview="mawa"
+            >
+                Mawa
+            </div>
+
+            <h3>
+                Mawa Image
+            </h3>
+
+            <input
+                type="file"
+                accept="image/*"
+                data-image-input="mawa"
+            >
+
+            <small>
+                File name: mawa.jpg
+            </small>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ======================================================
+     SEO
+======================================================= -->
+
+<section
+    id="seo"
+    class="admin-section"
+>
+
+
+    <div class="section-title">
+
+        <span class="eyebrow">
+            SEO
+        </span>
+
+        <h2>
+            Search Engine Settings
+        </h2>
+
+        <p>
+            Manage the title and description used
+            for search engines.
+        </p>
+
+    </div>
+
+
+
+    <div class="admin-card">
+
+
+        <div class="form-group">
+
+            <label for="seo-title">
+                Website Title
+            </label>
+
+            <input
+                id="seo-title"
+                type="text"
+                value="Jhalawar Pure & Fresh Organic Milk"
+            >
+
+        </div>
+
+
+
+        <div class="form-group">
+
+            <label for="seo-description">
+                Meta Description
+            </label>
+
+            <textarea
+                id="seo-description"
+                rows="4"
+            >Fresh milk, dahi, chhach, desi ghee and mawa delivered in Jhalrapatan, Jhalawar, Rajasthan.</textarea>
+
+        </div>
+
+
+
+        <div class="card-actions">
+
+            <button
+                type="button"
+                class="save-button"
+            >
+                Save SEO Settings
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+</main>
+
+
+</div>
+
+
+
+<!-- ======================================================
+     JAVASCRIPT
+======================================================= -->
+
+<script src="config.js"></script>
+
+<script src="admin-dashboard.js"></script>
+
+
+</body>
+
+</html>

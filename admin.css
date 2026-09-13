@@ -1,0 +1,279 @@
+/* =========================================================
+   JHALAWAR ORGANIC MILK
+   ADMIN LOGIN STYLES
+========================================================= */
+
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fff8e9;
+    color: #203128;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.admin-login-page {
+    min-height: 100vh;
+    padding: 25px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(214, 182, 91, 0.18),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            rgba(35, 70, 48, 0.10),
+            transparent 35%
+        ),
+        #fff8e9;
+}
+
+
+/* =========================
+   LOGIN CARD
+========================= */
+
+.login-card {
+    width: 100%;
+    max-width: 430px;
+    padding: 30px 22px;
+    border: 1px solid #eee3cc;
+    border-radius: 26px;
+    background: #ffffff;
+    box-shadow:
+        0 25px 60px rgba(35, 70, 48, 0.10);
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.login-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-logo-circle {
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #f5ecd5;
+
+    font-size: 31px;
+
+    box-shadow:
+        0 10px 25px rgba(35, 70, 48, 0.08);
+}
+
+.login-logo h1 {
+    margin-bottom: 4px;
+    color: #234630;
+    font-size: 20px;
+    line-height: 1.2;
+}
+
+.login-logo p {
+    color: #ac7d16;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+
+/* =========================
+   HEADING
+========================= */
+
+.login-heading {
+    margin-bottom: 25px;
+}
+
+.login-heading h2 {
+    margin-bottom: 7px;
+    color: #1e3528;
+    font-size: 28px;
+    line-height: 1.1;
+}
+
+.login-heading p {
+    color: #748079;
+    font-size: 13px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #33473b;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.form-group input {
+    width: 100%;
+    height: 52px;
+    padding: 0 14px;
+
+    border: 1px solid #ddd3bb;
+    border-radius: 13px;
+
+    outline: none;
+
+    background: #fffdf9;
+    color: #24362b;
+
+    font-size: 14px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-group input::placeholder {
+    color: #a0a8a2;
+}
+
+.form-group input:focus {
+    border-color: #234630;
+
+    box-shadow:
+        0 0 0 3px rgba(35, 70, 48, 0.08);
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+.login-error {
+    min-height: 20px;
+    margin-bottom: 6px;
+
+    color: #b3261e;
+    font-size: 12px;
+}
+
+
+/* =========================
+   LOGIN BUTTON
+========================= */
+
+.login-button {
+    width: 100%;
+    min-height: 52px;
+
+    border-radius: 13px;
+
+    background: #234630;
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.login-button:hover {
+    transform: translateY(-2px);
+
+    background: #1b3826;
+
+    box-shadow:
+        0 12px 25px rgba(35, 70, 48, 0.17);
+}
+
+.login-button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.login-footer {
+    margin-top: 25px;
+    padding-top: 20px;
+
+    text-align: center;
+
+    border-top: 1px solid #eee7d9;
+}
+
+.login-footer p {
+    margin-bottom: 8px;
+    color: #929a94;
+    font-size: 11px;
+}
+
+.login-footer a {
+    color: #ad7e15;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* =========================
+   TABLET / DESKTOP
+========================= */
+
+@media (min-width: 600px) {
+
+    .admin-login-page {
+        padding: 40px 20px;
+    }
+
+    .login-card {
+        padding: 40px 35px;
+    }
+
+    .login-logo h1 {
+        font-size: 22px;
+    }
+
+    .login-heading h2 {
+        font-size: 31px;
+    }
+}
