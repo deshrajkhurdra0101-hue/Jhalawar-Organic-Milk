@@ -14,7 +14,7 @@ const businessConfig = {
 
     phoneNumber: "8890017418",
 
-    whatsappNumber: "8890017418",
+    whatsappNumber: "918890017418",
 
     instagramHandle: "jhalawarorganicmilk",
 
@@ -53,9 +53,9 @@ const businessConfig = {
 
     deliveryCharge: 0,
 
-deliveryAreas: [
-    "Jhalawar, Rajasthan"
-],
+    deliveryAreas: [
+        "Jhalawar, Rajasthan"
+    ],
 
 
     /* =====================================================
