@@ -8,10 +8,56 @@
    1. LOGIN PROTECTION
 ========================================================= */
 
-if (
-    sessionStorage.getItem("adminLoggedIn") !== "true"
-) {
-    window.location.replace("admin.html");
+/* =========================================================
+   SUPABASE AUTHENTICATION
+========================================================= */
+
+const supabaseClient = window.supabase.createClient(
+    businessConfig.supabase.url,
+    businessConfig.supabase.key
+);
+
+
+/* =========================================================
+   LOGIN PROTECTION
+========================================================= */
+
+async function checkAdminLogin() {
+
+    const {
+        data: {
+            session
+        }
+    } = await supabaseClient.auth.getSession();
+
+
+    if (!session) {
+
+        window.location.replace("admin.html");
+
+        return false;
+    }
+
+
+    const user =
+        session.user;
+
+
+    if (
+        user.email !==
+        "jhalawarorganicmilk@gmail.com"
+    ) {
+
+        await supabaseClient.auth.signOut();
+
+        window.location.replace("admin.html");
+
+        return false;
+    }
+
+
+    return true;
+
 }
 
 
@@ -347,45 +393,59 @@ function setupLogout() {
             "logout-button"
         );
 
-
     if (!logoutButton) {
-
         return;
-
     }
-
 
     logoutButton.addEventListener(
         "click",
-        () => {
+        async () => {
 
             const confirmLogout =
                 confirm(
                     "Are you sure you want to logout?"
                 );
 
-
             if (!confirmLogout) {
-
                 return;
-
             }
 
+            logoutButton.disabled =
+                true;
 
-            sessionStorage.removeItem(
-                "adminLoggedIn"
-            );
+            logoutButton.textContent =
+                "Logging out...";
 
+            const { error } =
+                await supabaseClient.auth.signOut();
+
+            if (error) {
+
+                console.error(
+                    "Logout error:",
+                    error
+                );
+
+                showMessage(
+                    "Logout failed. Please try again.",
+                    "error"
+                );
+
+                logoutButton.disabled =
+                    false;
+
+                logoutButton.textContent =
+                    "Logout";
+
+                return;
+            }
 
             window.location.replace(
                 "admin.html"
             );
-
         }
     );
-
 }
-
 
 /* =========================================================
    9. BUSINESS DETAILS
@@ -3001,7 +3061,18 @@ function setupSidebarNavigation() {
 
 document.addEventListener(
     "DOMContentLoaded",
-    () => {
+    async () => {
+
+        const isLoggedIn =
+            await checkAdminLogin();
+
+
+        if (!isLoggedIn) {
+
+            return;
+
+        }
+
 
         loadBusinessDetails();
 
@@ -3041,12 +3112,407 @@ document.addEventListener(
 
         setupSidebarNavigation();
 
+         setupAdminFeedback();
+         
         refreshDashboardStatus();
 
     }
 );
-
-
 /* =========================================================
    FINAL ADMIN DASHBOARD JS END
 ========================================================= */
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+/* =========================================================
+   ADMIN FEEDBACK MANAGEMENT
+========================================================= */
+
+async function setupAdminFeedback() {
+
+    const feedbackList =
+        document.getElementById(
+            "admin-feedback-list"
+        );
+
+    if (!feedbackList) {
+        return;
+    }
+
+
+    async function loadAdminFeedback() {
+
+
+        feedbackList.innerHTML =
+            "<p>Loading feedback...</p>";
+
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+            .from("feedback")
+            .select(
+                "id, created_at, name, rating, message, approved"
+            )
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
+
+
+        if (error) {
+
+            console.error(
+                "Admin feedback load error:",
+                error
+            );
+
+            feedbackList.innerHTML =
+                "<p>Feedback load nahi ho paaya.</p>";
+
+            return;
+        }
+
+const totalElement =
+    document.getElementById("feedback-total");
+
+const pendingElement =
+    document.getElementById("feedback-pending");
+
+const approvedElement =
+    document.getElementById("feedback-approved");
+
+
+const totalReviews =
+    data.length;
+
+const pendingReviews =
+    data.filter(
+        (review) =>
+            !review.approved
+    ).length;
+
+const approvedReviews =
+    data.filter(
+        (review) =>
+            review.approved
+    ).length;
+const averageElement =
+    document.getElementById("feedback-average");
+
+const averageRating =
+    data.length
+        ? (
+            data.reduce(
+                (sum, review) =>
+                    sum + Number(review.rating || 0),
+                0
+            ) / data.length
+        ).toFixed(1)
+        : "0.0";
+
+
+if (averageElement) {
+    averageElement.textContent =
+        `${averageRating} / 5`;
+}
+
+if (totalElement) {
+    totalElement.textContent =
+        totalReviews;
+}
+
+if (pendingElement) {
+    pendingElement.textContent =
+        pendingReviews;
+}
+
+if (approvedElement) {
+    approvedElement.textContent =
+        approvedReviews;
+}
+        if (!data || !data.length) {
+
+            feedbackList.innerHTML =
+                "<p>Abhi koi feedback nahi hai.</p>";
+
+            return;
+        }
+
+
+        feedbackList.innerHTML =
+            data.map(
+                (review) => {
+
+                    const stars =
+                        "★".repeat(
+                            Number(review.rating)
+                        ) +
+                        "☆".repeat(
+                            5 - Number(review.rating)
+                        );
+
+
+                    const status =
+                        review.approved
+                            ? "✅ Approved"
+                            : "⏳ Pending";
+
+
+                    const actionButton =
+                        review.approved
+                            ? `
+                                <button
+                                    type="button"
+                                    class="save-button"
+                                    data-hide-feedback="${review.id}"
+                                >
+                                    Hide
+                                </button>
+                              `
+                            : `
+                                <button
+                                    type="button"
+                                    class="save-button"
+                                    data-approve-feedback="${review.id}"
+                                >
+                                    Approve
+                                </button>
+                              `;
+
+
+                    return `
+                        <div class="admin-card"
+                             style="margin-bottom: 16px;">
+
+                            <h3>
+                                ${escapeHTML(review.name)}
+                            </h3>
+
+                            <p>
+                                <strong>
+                                    ${stars}
+                                </strong>
+                            </p>
+
+                            <p>
+                                ${escapeHTML(review.message)}
+                            </p>
+
+                            <p>
+                                ${status}
+                            </p>
+<p style="font-size: 13px; opacity: 0.7;">
+    ${new Date(review.created_at).toLocaleString("en-IN")}
+</p>
+                            <div class="card-actions">
+
+                                ${actionButton}
+
+                                <button
+                                    type="button"
+                                    class="logout-button"
+                                    data-delete-feedback="${review.id}"
+                                >
+                                    Delete
+                                </button>
+
+                            </div>
+
+                        </div>
+                    `;
+
+                }
+            ).join("");
+
+
+        setupFeedbackActions();
+
+    }
+
+
+    function setupFeedbackActions() {
+
+        document
+            .querySelectorAll(
+                "[data-approve-feedback]"
+            )
+            .forEach(
+                (button) => {
+
+                    button.addEventListener(
+                        "click",
+                        async () => {
+
+                            const id =
+                                button.dataset
+                                    .approveFeedback;
+
+
+                            const {
+                                error
+                            } = await supabaseClient
+                                .from("feedback")
+                                .update({
+                                    approved: true
+                                })
+                                .eq(
+                                    "id",
+                                    id
+                                );
+
+
+                            if (error) {
+
+                                console.error(
+                                    "Approve error:",
+                                    error
+                                );
+
+                                alert(
+                                    "Feedback approve nahi ho paaya."
+                                );
+
+                                return;
+                            }
+
+
+                            await loadAdminFeedback();
+
+                        }
+                    );
+
+                }
+            );
+
+
+        document
+            .querySelectorAll(
+                "[data-hide-feedback]"
+            )
+            .forEach(
+                (button) => {
+
+                    button.addEventListener(
+                        "click",
+                        async () => {
+
+                            const id =
+                                button.dataset
+                                    .hideFeedback;
+
+
+                            const {
+                                error
+                            } = await supabaseClient
+                                .from("feedback")
+                                .update({
+                                    approved: false
+                                })
+                                .eq(
+                                    "id",
+                                    id
+                                );
+
+
+                            if (error) {
+
+                                console.error(
+                                    "Hide error:",
+                                    error
+                                );
+
+                                alert(
+                                    "Feedback hide nahi ho paaya."
+                                );
+
+                                return;
+                            }
+
+
+                            await loadAdminFeedback();
+
+                        }
+                    );
+
+                }
+            );
+
+
+        document
+            .querySelectorAll(
+                "[data-delete-feedback]"
+            )
+            .forEach(
+                (button) => {
+
+                    button.addEventListener(
+                        "click",
+                        async () => {
+
+                            const id =
+                                button.dataset
+                                    .deleteFeedback;
+
+
+                            const confirmDelete =
+                                confirm(
+                                    "Kya aap is feedback ko permanently delete karna chahte hain?"
+                                );
+
+
+                            if (!confirmDelete) {
+                                return;
+                            }
+
+
+                            const {
+                                error
+                            } = await supabaseClient
+                                .from("feedback")
+                                .delete()
+                                .eq(
+                                    "id",
+                                    id
+                                );
+
+
+                            if (error) {
+
+                                console.error(
+                                    "Delete error:",
+                                    error
+                                );
+
+                                alert(
+                                    "Feedback delete nahi ho paaya."
+                                );
+
+                                return;
+                            }
+
+
+                            await loadAdminFeedback();
+
+                        }
+                    );
+
+                }
+            );
+
+    }
+
+
+    await loadAdminFeedback();
+
+}

@@ -151,7 +151,12 @@
             >
                 🖼️ Images
             </a>
-
+<a
+    href="#feedback"
+    class="sidebar-link"
+>
+    ⭐ Feedback
+</a>
 
             <a
                 href="#seo"
@@ -1903,7 +1908,110 @@
 
 </section>
 
+<!-- ======================================================
+     FEEDBACK
+======================================================= -->
 
+<section
+    id="feedback"
+    class="admin-section"
+>
+
+    <div class="section-title">
+
+        <span class="eyebrow">
+            CUSTOMER FEEDBACK
+        </span>
+
+        <h2>
+            Manage Feedback
+        </h2>
+
+        <p>
+            Review customer feedback and approve
+            reviews for the website.
+        </p>
+
+    </div>
+<div class="status-grid feedback-summary-grid">
+
+    <div class="status-card">
+
+        <span class="status-icon">
+            ⭐
+        </span>
+
+        <div>
+            <strong>
+                Total Reviews
+            </strong>
+
+            <span id="feedback-total">
+                0
+            </span>
+        </div>
+
+    </div>
+
+
+    <div class="status-card">
+
+        <span class="status-icon">
+            ⏳
+        </span>
+
+        <div>
+            <strong>
+                Pending
+            </strong>
+
+            <span id="feedback-pending">
+                0
+            </span>
+        </div>
+
+    </div>
+
+
+    <div class="status-card">
+
+        <span class="status-icon">
+            ✅
+        </span>
+
+        <div>
+            <strong>
+                Approved
+            </strong>
+
+            <span id="feedback-approved">
+                0
+            </span>
+        </div>
+
+    </div>
+<div class="status-card">
+    <span class="status-icon">⭐</span>
+    <div>
+        <strong>Average Rating</strong>
+        <span id="feedback-average">0.0 / 5</span>
+    </div>
+</div>
+</div>
+
+    <div class="admin-card">
+
+        <div id="admin-feedback-list">
+
+            <p>
+                Loading feedback...
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
 
 <!-- ======================================================
      SEO
@@ -1998,8 +2106,8 @@
      JAVASCRIPT
 ======================================================= -->
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
-
 <script src="admin-dashboard.js"></script>
 
 

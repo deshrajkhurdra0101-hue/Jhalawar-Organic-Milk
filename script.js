@@ -80,176 +80,6 @@ function getWebsiteConfig() {
 
         };
 
-
-        /* -------------------------------------------------
-           DEFAULT MILK PRICES
-        ------------------------------------------------- */
-
-        if (
-            !Number.isFinite(
-                Number(data.products.milk.price)
-            ) ||
-            Number(data.products.milk.price) <= 0
-        ) {
-
-            data.products.milk.price =
-                businessConfig.products.milk.price;
-
-        }
-
-
-        if (
-            !Number.isFinite(
-                Number(data.products.milk.cowMilkPrice)
-            ) ||
-            Number(data.products.milk.cowMilkPrice) <= 0
-        ) {
-
-            data.products.milk.cowMilkPrice = 65;
-
-        }
-
-
-        if (
-            !Number.isFinite(
-                Number(data.products.milk.buffaloMilkPrice)
-            ) ||
-            Number(data.products.milk.buffaloMilkPrice) <= 0
-        ) {
-
-            data.products.milk.buffaloMilkPrice = 75;
-
-        }
-
-
-        /* -------------------------------------------------
-           CURD
-        ------------------------------------------------- */
-
-        if (
-            !Number.isFinite(
-                Number(data.products.curd.price)
-            ) ||
-            Number(data.products.curd.price) <= 0
-        ) {
-
-            data.products.curd.price = 120;
-
-        }
-
-
-        /* -------------------------------------------------
-           BUTTERMILK
-        ------------------------------------------------- */
-
-        if (
-            !Number.isFinite(
-                Number(data.products.buttermilk.price)
-            ) ||
-            Number(data.products.buttermilk.price) <= 0
-        ) {
-
-            data.products.buttermilk.price = 30;
-
-        }
-
-
-        /* -------------------------------------------------
-           GHEE
-        ------------------------------------------------- */
-
-        if (
-            !Number.isFinite(
-                Number(data.products.ghee.price)
-            ) ||
-            Number(data.products.ghee.price) <= 0
-        ) {
-
-            data.products.ghee.price = 1499;
-
-        }
-
-
-        if (data.products.ghee.variants) {
-
-            if (
-                !Number.isFinite(
-                    Number(
-                        data.products.ghee.variants.cow?.price
-                    )
-                ) ||
-                Number(
-                    data.products.ghee.variants.cow?.price
-                ) <= 0
-            ) {
-
-                data.products.ghee.variants.cow.price =
-                    1499;
-
-            }
-
-
-            if (
-                !Number.isFinite(
-                    Number(
-                        data.products.ghee.variants.buffalo?.price
-                    )
-                ) ||
-                Number(
-                    data.products.ghee.variants.buffalo?.price
-                ) <= 0
-            ) {
-
-                data.products.ghee.variants.buffalo.price =
-                    1299;
-
-            }
-
-        }
-
-
-        /* -------------------------------------------------
-           LOCATION
-        ------------------------------------------------- */
-
-        if (
-            !data.shopAddress ||
-            data.shopAddress === "SHOP_ADDRESS"
-        ) {
-
-            data.shopAddress =
-                "Jhalrapatan, Jhalawar, Rajasthan";
-
-        }
-
-
-        /* -------------------------------------------------
-           DELIVERY
-        ------------------------------------------------- */
-
-        if (!data.deliveryStartTime) {
-
-            data.deliveryStartTime =
-                "6:00 AM";
-
-        }
-
-
-        if (!data.deliveryEndTime) {
-
-            data.deliveryEndTime =
-                "12:00 PM";
-
-        }
-
-
-        if (data.deliveryCharge === undefined) {
-
-            data.deliveryCharge = 0;
-
-        }
-
-
         return data;
 
     } catch (error) {
@@ -273,6 +103,14 @@ function getWebsiteConfig() {
 const siteData =
     getWebsiteConfig();
 
+/* =========================================================
+   SUPABASE CONNECTION
+========================================================= */
+
+const supabaseClient = window.supabase.createClient(
+    businessConfig.supabase.url,
+    businessConfig.supabase.key
+);
 
 /* =========================================================
    3. HELPER FUNCTIONS
@@ -308,7 +146,6 @@ function createWhatsAppUrl(message) {
             siteData.whatsappNumber
         );
 
-
     if (!phone) {
 
         console.error(
@@ -318,7 +155,6 @@ function createWhatsAppUrl(message) {
         return "#";
 
     }
-
 
     return (
         `https://wa.me/${phone}` +
@@ -332,17 +168,20 @@ function createWhatsAppUrl(message) {
    4. MOBILE MENU
 ========================================================= */
 
-const menuButton =
-    getElement("menu-button");
+function setupMobileMenu() {
 
-const mobileMenu =
-    getElement("mobile-menu");
+    const menuButton =
+        getElement("menu-button");
 
+    const mobileMenu =
+        getElement("mobile-menu");
 
-if (
-    menuButton &&
-    mobileMenu
-) {
+    if (
+        !menuButton ||
+        !mobileMenu
+    ) {
+        return;
+    }
 
     menuButton.addEventListener(
         "click",
@@ -353,18 +192,15 @@ if (
                     "active"
                 );
 
-
             mobileMenu.classList.toggle(
                 "open",
                 isOpen
             );
 
-
             menuButton.textContent =
                 isOpen
                     ? "✕"
                     : "☰";
-
 
             menuButton.setAttribute(
                 "aria-label",
@@ -375,7 +211,6 @@ if (
 
         }
     );
-
 
     mobileMenu
         .querySelectorAll("a")
@@ -391,10 +226,8 @@ if (
                             "open"
                         );
 
-
                         menuButton.textContent =
                             "☰";
-
 
                         menuButton.setAttribute(
                             "aria-label",
@@ -416,16 +249,10 @@ if (
 
 function loadBusinessInformation() {
 
-
-    /* -----------------------------------------------------
-       BUSINESS NAME
-    ----------------------------------------------------- */
-
     const logoStrong =
         document.querySelector(
             ".logo-text strong"
         );
-
 
     if (
         logoStrong &&
@@ -438,15 +265,10 @@ function loadBusinessInformation() {
     }
 
 
-    /* -----------------------------------------------------
-       BRAND NAME
-    ----------------------------------------------------- */
-
     const logoSpan =
         document.querySelector(
             ".logo-text span"
         );
-
 
     if (
         logoSpan &&
@@ -459,18 +281,12 @@ function loadBusinessInformation() {
     }
 
 
-    /* -----------------------------------------------------
-       OWNER
-    ----------------------------------------------------- */
-
     const ownerName =
         getElement("owner-name");
 
-
     if (
         ownerName &&
-        siteData.ownerName &&
-        siteData.ownerName !== "OWNER_NAME"
+        siteData.ownerName
     ) {
 
         ownerName.textContent =
@@ -479,36 +295,22 @@ function loadBusinessInformation() {
     }
 
 
-    /* -----------------------------------------------------
-       SHOP ADDRESS
-    ----------------------------------------------------- */
-
     const shopAddress =
         getElement("shop-address");
 
-
     if (
         shopAddress &&
-        siteData.shopAddress &&
-        siteData.shopAddress !== "SHOP_ADDRESS"
+        siteData.shopAddress
     ) {
 
         shopAddress.textContent =
             siteData.shopAddress;
 
-        shopAddress.style.display =
-            "";
-
     }
 
 
-    /* -----------------------------------------------------
-       DELIVERY TIME
-    ----------------------------------------------------- */
-
     const deliveryTime =
         getElement("delivery-time");
-
 
     if (
         deliveryTime &&
@@ -522,13 +324,8 @@ function loadBusinessInformation() {
     }
 
 
-    /* -----------------------------------------------------
-       CONTACT NUMBER
-    ----------------------------------------------------- */
-
     const contactNumber =
         getElement("contact-number");
-
 
     if (
         contactNumber &&
@@ -541,13 +338,8 @@ function loadBusinessInformation() {
     }
 
 
-    /* -----------------------------------------------------
-       INSTAGRAM
-    ----------------------------------------------------- */
-
     const instagramHandle =
         getElement("instagram-handle");
-
 
     if (
         instagramHandle &&
@@ -555,7 +347,9 @@ function loadBusinessInformation() {
     ) {
 
         instagramHandle.textContent =
-            siteData.instagramHandle;
+            `@${String(
+                siteData.instagramHandle
+            ).replace(/^@/, "")}`;
 
     }
 
@@ -573,15 +367,6 @@ function loadProductData() {
     }
 
 
-    /* -----------------------------------------------------
-       PRODUCT PRICES
-       
-       IMPORTANT:
-       Yahan sirf base price load hoga.
-       Milk/Ghee variant price alag functions
-       se handle hoga.
-    ----------------------------------------------------- */
-
     document
         .querySelectorAll(
             "[data-product-price]"
@@ -592,12 +377,10 @@ function loadProductData() {
                 const productName =
                     element.dataset.productPrice;
 
-
                 const product =
                     siteData.products[
                         productName
                     ];
-
 
                 if (
                     product &&
@@ -605,10 +388,7 @@ function loadProductData() {
                 ) {
 
                     const price =
-                        Number(
-                            product.price
-                        );
-
+                        Number(product.price);
 
                     element.textContent =
                         Number.isFinite(price) &&
@@ -623,10 +403,6 @@ function loadProductData() {
             }
         );
 
-
-    /* -----------------------------------------------------
-       PRODUCT IMAGES
-    ----------------------------------------------------- */
 
     const productImageMap = {
 
@@ -656,12 +432,10 @@ function loadProductData() {
                     selector
                 );
 
-
             const product =
                 siteData.products[
                     productName
                 ];
-
 
             if (
                 image &&
@@ -678,10 +452,6 @@ function loadProductData() {
     );
 
 
-    /* -----------------------------------------------------
-       QUANTITY BUTTONS
-    ----------------------------------------------------- */
-
     document
         .querySelectorAll(
             ".quantity-options"
@@ -692,12 +462,10 @@ function loadProductData() {
                 const productName =
                     container.dataset.product;
 
-
                 const product =
                     siteData.products[
                         productName
                     ];
-
 
                 if (
                     !product ||
@@ -705,15 +473,11 @@ function loadProductData() {
                         product.quantities
                     )
                 ) {
-
                     return;
-
                 }
-
 
                 container.innerHTML =
                     "";
-
 
                 product.quantities
                     .forEach(
@@ -724,23 +488,18 @@ function loadProductData() {
                                     "button"
                                 );
 
-
                             button.type =
                                 "button";
-
 
                             button.classList.add(
                                 "quantity-button"
                             );
 
-
                             button.textContent =
                                 quantity;
 
-
                             button.dataset.quantity =
                                 quantity;
-
 
                             if (
                                 index === 0
@@ -751,7 +510,6 @@ function loadProductData() {
                                 );
 
                             }
-
 
                             button.addEventListener(
                                 "click",
@@ -771,14 +529,12 @@ function loadProductData() {
                                             }
                                         );
 
-
                                     button.classList.add(
                                         "active"
                                     );
 
                                 }
                             );
-
 
                             container.appendChild(
                                 button
@@ -795,8 +551,7 @@ function loadProductData() {
 
 /* =========================================================
    PART 1 END
-========================================================= */
-/* =========================================================
+========================================================= *//* =========================================================
    7. HERO IMAGE
 ========================================================= */
 
@@ -807,11 +562,9 @@ function loadHeroImage() {
             ".hero-image-card img"
         );
 
-
     if (
         heroImage &&
-        siteData.images &&
-        siteData.images.hero
+        siteData.images?.hero
     ) {
 
         heroImage.src =
@@ -833,11 +586,9 @@ function loadLogoImage() {
             ".logo-image img"
         );
 
-
     if (
         logoImage &&
-        siteData.images &&
-        siteData.images.logo
+        siteData.images?.logo
     ) {
 
         logoImage.src =
@@ -859,13 +610,11 @@ function loadDeliveryImage() {
             ".delivery-story-image img"
         );
 
-
     if (
         deliveryImage &&
-        siteData.images &&
         (
-            siteData.images.deliveryBanner ||
-            siteData.images.delivery
+            siteData.images?.deliveryBanner ||
+            siteData.images?.delivery
         )
     ) {
 
@@ -889,11 +638,9 @@ function loadOwnerImage() {
             ".about-image img"
         );
 
-
     if (
         ownerImage &&
-        siteData.images &&
-        siteData.images.owner
+        siteData.images?.owner
     ) {
 
         ownerImage.src =
@@ -914,77 +661,45 @@ function loadWebsiteImages() {
         return;
     }
 
+    const imageMap = {
 
-    const heroImage =
-        document.querySelector(
-            ".hero-image-card img"
-        );
+        ".hero-image-card img":
+            siteData.images.hero,
 
+        ".logo-image img":
+            siteData.images.logo,
 
-    if (
-        heroImage &&
-        siteData.images.hero
-    ) {
-
-        heroImage.src =
-            siteData.images.hero;
-
-    }
-
-
-    const logoImage =
-        document.querySelector(
-            ".logo-image img"
-        );
-
-
-    if (
-        logoImage &&
-        siteData.images.logo
-    ) {
-
-        logoImage.src =
-            siteData.images.logo;
-
-    }
-
-
-    const deliveryImage =
-        document.querySelector(
-            ".delivery-story-image img"
-        );
-
-
-    if (
-        deliveryImage &&
-        (
+        ".delivery-story-image img":
             siteData.images.deliveryBanner ||
-            siteData.images.delivery
-        )
-    ) {
+            siteData.images.delivery,
 
-        deliveryImage.src =
-            siteData.images.deliveryBanner ||
-            siteData.images.delivery;
+        ".about-image img":
+            siteData.images.owner
 
-    }
+    };
 
 
-    const ownerImage =
-        document.querySelector(
-            ".about-image img"
+    Object.entries(imageMap)
+        .forEach(
+            ([selector, imagePath]) => {
+
+                const image =
+                    document.querySelector(
+                        selector
+                    );
+
+                if (
+                    image &&
+                    imagePath
+                ) {
+
+                    image.src =
+                        imagePath;
+
+                }
+
+            }
         );
-
-
-    if (
-        ownerImage &&
-        siteData.images.owner
-    ) {
-
-        ownerImage.src =
-            siteData.images.owner;
-
-    }
 
 
     const productImages = {
@@ -1004,30 +719,27 @@ function loadWebsiteImages() {
     };
 
 
-    Object.entries(
-        productImages
-    )
-    .forEach(
-        ([productKey, imagePath]) => {
+    Object.entries(productImages)
+        .forEach(
+            ([productKey, imagePath]) => {
 
-            const image =
-                document.querySelector(
-                    `article[data-product="${productKey}"] .product-image img`
-                );
+                const image =
+                    document.querySelector(
+                        `article[data-product="${productKey}"] .product-image img`
+                    );
 
+                if (
+                    image &&
+                    imagePath
+                ) {
 
-            if (
-                image &&
-                imagePath
-            ) {
+                    image.src =
+                        imagePath;
 
-                image.src =
-                    imagePath;
+                }
 
             }
-
-        }
-    );
+        );
 
 
     const brandBanners =
@@ -1095,7 +807,6 @@ Thank you.
             const button =
                 getElement(id);
 
-
             if (
                 button &&
                 whatsappUrl !== "#"
@@ -1119,51 +830,45 @@ Thank you.
 
 
 /* =========================================================
+   PART 2 END
+========================================================= */
+/* =========================================================
    13. PRODUCT WHATSAPP ORDERS
 ========================================================= */
 
 
 /* ---------------------------------------------------------
-   GET SELECTED QUANTITY
+   GET SELECTED PRODUCT QUANTITY
 --------------------------------------------------------- */
 
-function getSelectedProductQuantity(
-    productName
-) {
+function getSelectedProductQuantity(productName) {
 
     const container =
         document.querySelector(
             `.quantity-options[data-product="${productName}"]`
         );
 
-
     if (!container) {
         return "";
     }
-
 
     const activeButton =
         container.querySelector(
             "button.active"
         );
 
-
-    if (!activeButton) {
-
-        const firstButton =
-            container.querySelector(
-                "button"
-            );
-
-
-        return firstButton
-            ? firstButton.dataset.quantity
-            : "";
-
+    if (activeButton) {
+        return activeButton.dataset.quantity;
     }
 
+    const firstButton =
+        container.querySelector(
+            "button"
+        );
 
-    return activeButton.dataset.quantity;
+    return firstButton
+        ? firstButton.dataset.quantity
+        : "";
 
 }
 
@@ -1179,17 +884,14 @@ function getSelectedMilkVariant() {
             'article[data-product="milk"]'
         );
 
-
     if (!milkCard) {
         return "Cow Milk";
     }
-
 
     const activeVariant =
         milkCard.querySelector(
             ".variant-button.active"
         );
-
 
     return activeVariant
         ? activeVariant.dataset.variant
@@ -1209,30 +911,23 @@ function getSelectedGheeVariant() {
             'article[data-product="ghee"]'
         );
 
-
     if (!gheeCard) {
         return "Cow Ghee";
     }
-
 
     const activeVariant =
         gheeCard.querySelector(
             ".ghee-types span.active"
         );
 
-
     if (activeVariant) {
-
         return activeVariant.textContent.trim();
-
     }
-
 
     const spans =
         gheeCard.querySelectorAll(
             ".ghee-types span"
         );
-
 
     return spans.length
         ? spans[0].textContent.trim()
@@ -1252,45 +947,39 @@ function loadMilkVariantPrice() {
             '[data-product-price="milk"]'
         );
 
-
     const milk =
         siteData.products?.milk;
-
 
     if (
         !priceElement ||
         !milk
     ) {
-
         return;
-
     }
-
 
     const variant =
         getSelectedMilkVariant();
 
-
     let price =
-        Number(milk.cowMilkPrice) || 65;
-
+        Number(
+            milk.cowMilkPrice
+        ) || 65;
 
     if (
         variant === "Buffalo Milk"
     ) {
 
         price =
-            Number(milk.buffaloMilkPrice) || 75;
+            Number(
+                milk.buffaloMilkPrice
+            ) || 75;
 
     }
-
 
     priceElement.textContent =
         Number.isFinite(price) &&
         price > 0
-            ? price.toLocaleString(
-                "en-IN"
-            )
+            ? price.toLocaleString("en-IN")
             : "--";
 
 }
@@ -1307,88 +996,48 @@ function loadGheeVariantPrice() {
             '[data-product-price="ghee"]'
         );
 
-
     const ghee =
         siteData.products?.ghee;
-
 
     if (
         !priceElement ||
         !ghee
     ) {
-
         return;
-
     }
-
 
     const variant =
         getSelectedGheeVariant();
 
-
-    let price = 1499;
-
+    let price =
+        1499;
 
     if (
         variant === "Buffalo Desi Ghee"
     ) {
 
-        price = 1299;
+        price =
+            Number(
+                ghee.variants?.buffalo?.price
+            ) || 1299;
 
     }
-
 
     if (
         variant === "Cow Ghee"
     ) {
 
-        price = 1499;
+        price =
+            Number(
+                ghee.variants?.cow?.price
+            ) || 1499;
 
     }
-
-
-    if (
-        ghee.variants?.cow?.price
-    ) {
-
-        if (
-            variant === "Cow Ghee"
-        ) {
-
-            price =
-                Number(
-                    ghee.variants.cow.price
-                ) || 1499;
-
-        }
-
-    }
-
-
-    if (
-        ghee.variants?.buffalo?.price
-    ) {
-
-        if (
-            variant === "Buffalo Desi Ghee"
-        ) {
-
-            price =
-                Number(
-                    ghee.variants.buffalo.price
-                ) || 1299;
-
-        }
-
-    }
-
 
     priceElement.textContent =
         Number.isFinite(price) &&
         price > 0
-            ? price.toLocaleString(
-                "en-IN"
-            )
+            ? price.toLocaleString("en-IN")
             : "--";
 
 }
@@ -1405,17 +1054,14 @@ function setupMilkVariants() {
             'article[data-product="milk"]'
         );
 
-
     if (!milkCard) {
         return;
     }
-
 
     const buttons =
         milkCard.querySelectorAll(
             ".variant-button"
         );
-
 
     buttons.forEach(
         (button) => {
@@ -1434,16 +1080,13 @@ function setupMilkVariants() {
                         }
                     );
 
-
                     button.classList.add(
                         "active"
                     );
 
-
                     loadMilkVariantPrice();
 
-
-                    calculateSubscription();
+                    
 
                 }
             );
@@ -1465,17 +1108,14 @@ function setupGheeVariants() {
             'article[data-product="ghee"]'
         );
 
-
     if (!gheeCard) {
         return;
     }
-
 
     const buttons =
         gheeCard.querySelectorAll(
             ".ghee-types span"
         );
-
 
     buttons.forEach(
         (button) => {
@@ -1494,11 +1134,9 @@ function setupGheeVariants() {
                         }
                     );
 
-
                     button.classList.add(
                         "active"
                     );
-
 
                     loadGheeVariantPrice();
 
@@ -1511,11 +1149,14 @@ function setupGheeVariants() {
 }
 
 
-/* =========================================================
-   14. PRODUCT ORDER BUTTONS
-========================================================= */
+/* ---------------------------------------------------------
+   PRODUCT ORDER SETUP
+--------------------------------------------------------- */
 
 function setupProductOrderButtons() {
+
+    let selectedOrder = null;
+
 
     document
         .querySelectorAll(
@@ -1531,22 +1172,13 @@ function setupProductOrderButtons() {
                         const productKey =
                             button.dataset.product;
 
-
                         const product =
-                            siteData.products[
+                            siteData.products?.[
                                 productKey
                             ];
 
-
                         if (!product) {
-
-                            console.error(
-                                "Product not found:",
-                                productKey
-                            );
-
                             return;
-
                         }
 
 
@@ -1559,16 +1191,11 @@ function setupProductOrderButtons() {
                         let variantText =
                             "";
 
-
                         let price =
                             Number(
                                 product.price
                             );
 
-
-                        /* ---------------------------------
-                           MILK PRICE
-                        --------------------------------- */
 
                         if (
                             productKey === "milk"
@@ -1577,32 +1204,18 @@ function setupProductOrderButtons() {
                             variantText =
                                 getSelectedMilkVariant();
 
-
-                            if (
+                            price =
                                 variantText ===
-                                "Buffalo Milk"
-                            ) {
-
-                                price =
-                                    Number(
+                                    "Buffalo Milk"
+                                    ? Number(
                                         product.buffaloMilkPrice
-                                    ) || 75;
-
-                            } else {
-
-                                price =
-                                    Number(
+                                    ) || 75
+                                    : Number(
                                         product.cowMilkPrice
                                     ) || 65;
 
-                            }
-
                         }
 
-
-                        /* ---------------------------------
-                           GHEE PRICE
-                        --------------------------------- */
 
                         if (
                             productKey === "ghee"
@@ -1611,80 +1224,53 @@ function setupProductOrderButtons() {
                             variantText =
                                 getSelectedGheeVariant();
 
-
-                            if (
+                            price =
                                 variantText ===
-                                "Buffalo Desi Ghee"
-                            ) {
-
-                                price =
-                                    Number(
-                                        product
-                                            .variants
+                                    "Buffalo Desi Ghee"
+                                    ? Number(
+                                        product.variants
                                             ?.buffalo
                                             ?.price
-                                    ) || 1299;
-
-                            } else {
-
-                                price =
-                                    Number(
-                                        product
-                                            .variants
+                                    ) || 1299
+                                    : Number(
+                                        product.variants
                                             ?.cow
                                             ?.price
                                     ) || 1499;
 
-                            }
-
                         }
 
 
-                        const priceText =
-                            Number.isFinite(price) &&
-                            price > 0
-                                ? `₹${price.toLocaleString(
-                                    "en-IN"
-                                )}`
-                                : "Price to be confirmed";
+                        selectedOrder = {
+
+                            productName:
+                                product.name,
+
+                            productKey:
+                                productKey,
+
+                            variant:
+                                variantText,
+
+                            quantity:
+                                quantity,
+
+                            price:
+                                price
+
+                        };
 
 
-                        const message = `
-Hello, I want to order from ${siteData.businessName}.
-
-Product: ${product.name}
-
-${variantText
-    ? `Type: ${variantText}`
-    : ""}
-
-Quantity: ${quantity || "Please confirm"}
-
-Price: ${priceText}
-
-Customer Name:
-Delivery Area:
-Delivery Address:
-
-Please confirm my order.
-                        `.trim();
-
-
-                        const url =
-                            createWhatsAppUrl(
-                                message
+                        const modal =
+                            getElement(
+                                "customer-order-modal"
                             );
 
 
-                        if (
-                            url !== "#"
-                        ) {
+                        if (modal) {
 
-                            window.open(
-                                url,
-                                "_blank",
-                                "noopener,noreferrer"
-                            );
+                            modal.style.display =
+                                "flex";
 
                         }
 
@@ -1694,473 +1280,176 @@ Please confirm my order.
             }
         );
 
-}
 
+    /* -----------------------------------------------------
+       CANCEL PRODUCT ORDER
+    ----------------------------------------------------- */
 
-/* =========================================================
-   PART 2 END
-========================================================= */
-/* =========================================================
-   15. SUBSCRIPTION CALCULATOR
-========================================================= */
-
-
-/* ---------------------------------------------------------
-   SUBSCRIPTION ELEMENTS
---------------------------------------------------------- */
-
-const subscriptionProduct =
-    getElement("subscription-product");
-
-const dailyQuantity =
-    getElement("daily-quantity");
-
-const subscriptionDays =
-    getElement("subscription-days");
-
-const monthlyQuantity =
-    getElement("monthly-quantity");
-
-const monthlyPrice =
-    getElement("monthly-price");
-
-
-/* ---------------------------------------------------------
-   UPDATE DAILY QUANTITY OPTIONS
---------------------------------------------------------- */
-
-function updateSubscriptionQuantityOptions() {
-
-    if (!subscriptionProduct || !dailyQuantity) {
-        return;
-    }
-
-
-    const productKey =
-        subscriptionProduct.value;
-
-
-    let options = [];
-
-
-    /* ---------------- MILK ---------------- */
-
-    if (productKey === "milk") {
-
-        options = [
-            {
-                value: "0.5",
-                text: "500 ml"
-            },
-            {
-                value: "1",
-                text: "1 Litre"
-            },
-            {
-                value: "2",
-                text: "2 Litres"
-            }
-        ];
-
-    }
-
-
-    /* ---------------- DAHI ---------------- */
-
-    if (productKey === "curd") {
-
-        options = [
-            {
-                value: "0.25",
-                text: "250 g"
-            },
-            {
-                value: "0.5",
-                text: "500 g"
-            },
-            {
-                value: "1",
-                text: "1 Kg"
-            }
-        ];
-
-    }
-
-
-    /* ---------------- CHHACH ---------------- */
-
-    if (productKey === "buttermilk") {
-
-        options = [
-            {
-                value: "0.25",
-                text: "250 ml"
-            },
-            {
-                value: "0.5",
-                text: "500 ml"
-            },
-            {
-                value: "1",
-                text: "1 Litre"
-            }
-        ];
-
-    }
-
-
-    dailyQuantity.innerHTML = "";
-
-
-    options.forEach(
-        (option) => {
-
-            const element =
-                document.createElement(
-                    "option"
-                );
-
-
-            element.value =
-                option.value;
-
-
-            element.textContent =
-                option.text;
-
-
-            dailyQuantity.appendChild(
-                element
-            );
-
-        }
-    );
-
-
-    calculateSubscription();
-
-}
-
-
-/* ---------------------------------------------------------
-   CALCULATE SUBSCRIPTION
---------------------------------------------------------- */
-
-function calculateSubscription() {
-
-    if (
-        !subscriptionProduct ||
-        !dailyQuantity ||
-        !subscriptionDays ||
-        !monthlyQuantity ||
-        !monthlyPrice
-    ) {
-
-        return;
-
-    }
-
-
-    const productKey =
-        subscriptionProduct.value;
-
-
-    const quantity =
-        Number(
-            dailyQuantity.value
+    const cancelButton =
+        getElement(
+            "cancel-order-button"
         );
 
 
-    const days =
-        Number(
-            subscriptionDays.value
+    if (cancelButton) {
+
+        cancelButton.addEventListener(
+            "click",
+            () => {
+
+                const modal =
+                    getElement(
+                        "customer-order-modal"
+                    );
+
+                if (modal) {
+
+                    modal.style.display =
+                        "none";
+
+                }
+
+                selectedOrder = null;
+
+            }
+        );
+
+    }
+
+
+    /* -----------------------------------------------------
+       CONFIRM PRODUCT ORDER
+    ----------------------------------------------------- */
+
+    const confirmButton =
+        getElement(
+            "confirm-order-button"
         );
 
 
-    const product =
-        siteData.products?.[
-            productKey
-        ];
+    if (confirmButton) {
+
+        confirmButton.addEventListener(
+            "click",
+            () => {
+
+                if (!selectedOrder) {
+                    return;
+                }
 
 
-    if (
-        !product ||
-        !Number.isFinite(quantity) ||
-        !Number.isFinite(days) ||
-        quantity <= 0 ||
-        days <= 0
-    ) {
-
-        monthlyQuantity.textContent =
-            "--";
+                const customerName =
+                    getElement(
+                        "customer-name"
+                    )?.value.trim();
 
 
-        monthlyPrice.textContent =
-            "₹--";
+                const customerMobile =
+                    getElement(
+                        "customer-mobile"
+                    )?.value.trim();
 
 
-        return;
+                const customerArea =
+                    getElement(
+                        "customer-area"
+                    )?.value.trim();
 
-    }
+
+                const customerAddress =
+                    getElement(
+                        "customer-address"
+                    )?.value.trim();
 
 
-    /* -----------------------------------------------------
-       PRODUCT PRICE
-    ----------------------------------------------------- */
+                const customerLandmark =
+                    getElement(
+                        "customer-landmark"
+                    )?.value.trim();
 
-    const price =
-        Number(
-            product.price
+
+                if (
+                    !customerName ||
+                    !customerMobile ||
+                    !customerArea ||
+                    !customerAddress
+                ) {
+
+                    alert(
+                        "Please fill all required details."
+                    );
+
+                    return;
+
+                }
+
+
+                const priceText =
+                    `₹${Number(
+                        selectedOrder.price
+                    ).toLocaleString("en-IN")}`;
+
+
+                const message = `
+Hello, I want to order from ${siteData.businessName}.
+
+Product: ${selectedOrder.productName}
+
+${selectedOrder.variant
+    ? `Type: ${selectedOrder.variant}`
+    : ""}
+
+Quantity: ${selectedOrder.quantity || "Please confirm"}
+
+Price: ${priceText}
+
+Customer Name: ${customerName}
+Mobile Number: ${customerMobile}
+Delivery Area: ${customerArea}
+Delivery Address: ${customerAddress}
+${customerLandmark
+    ? `Landmark: ${customerLandmark}`
+    : ""}
+
+Please confirm my order.
+                `.trim();
+
+
+                const url =
+                    createWhatsAppUrl(
+                        message
+                    );
+
+
+                if (url !== "#") {
+
+                    window.open(
+                        url,
+                        "_blank",
+                        "noopener,noreferrer"
+                    );
+
+                }
+
+
+                const modal =
+                    getElement(
+                        "customer-order-modal"
+                    );
+
+                if (modal) {
+
+                    modal.style.display =
+                        "none";
+
+                }
+
+                selectedOrder = null;
+
+            }
         );
 
-
-    if (
-        !Number.isFinite(price) ||
-        price <= 0
-    ) {
-
-        monthlyQuantity.textContent =
-            "--";
-
-
-        monthlyPrice.textContent =
-            "₹--";
-
-
-        return;
-
     }
-
-
-    /* -----------------------------------------------------
-       TOTAL QUANTITY
-    ----------------------------------------------------- */
-
-    const totalQuantity =
-        quantity * days;
-
-
-    /* -----------------------------------------------------
-       TOTAL PRICE
-    ----------------------------------------------------- */
-
-    const totalAmount =
-        totalQuantity * price;
-
-
-    /* -----------------------------------------------------
-       UNIT
-    ----------------------------------------------------- */
-
-    let unit = "";
-
-
-    if (
-        productKey === "milk"
-    ) {
-
-        unit = "L";
-
-    }
-
-
-    if (
-        productKey === "curd"
-    ) {
-
-        unit = "Kg";
-
-    }
-
-
-    if (
-        productKey === "buttermilk"
-    ) {
-
-        unit = "L";
-
-    }
-
-
-    /* -----------------------------------------------------
-       SHOW RESULT
-    ----------------------------------------------------- */
-
-    monthlyQuantity.textContent =
-        `${totalQuantity.toFixed(2)} ${unit}`;
-
-
-    monthlyPrice.textContent =
-        `₹${totalAmount.toLocaleString(
-            "en-IN",
-            {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }
-        )}`;
-
-}
-
-
-/* ---------------------------------------------------------
-   PRODUCT CHANGE
---------------------------------------------------------- */
-
-if (subscriptionProduct) {
-
-    subscriptionProduct.addEventListener(
-        "change",
-        () => {
-
-            updateSubscriptionQuantityOptions();
-
-        }
-    );
-
-}
-
-
-/* ---------------------------------------------------------
-   QUANTITY CHANGE
---------------------------------------------------------- */
-
-if (dailyQuantity) {
-
-    dailyQuantity.addEventListener(
-        "change",
-        calculateSubscription
-    );
-
-}
-
-
-/* ---------------------------------------------------------
-   DAYS CHANGE
---------------------------------------------------------- */
-
-if (subscriptionDays) {
-
-    subscriptionDays.addEventListener(
-        "input",
-        calculateSubscription
-    );
-
-}
-
-
-/* =========================================================
-   16. SUBSCRIPTION WHATSAPP
-========================================================= */
-
-const subscriptionWhatsAppButton =
-    getElement(
-        "subscription-whatsapp-button"
-    );
-
-
-if (
-    subscriptionWhatsAppButton
-) {
-
-    subscriptionWhatsAppButton.addEventListener(
-        "click",
-        () => {
-
-            calculateSubscription();
-
-
-            const productKey =
-                subscriptionProduct
-                    ? subscriptionProduct.value
-                    : "milk";
-
-
-            const product =
-                siteData.products?.[
-                    productKey
-                ];
-
-
-            const quantity =
-                dailyQuantity
-                    ? dailyQuantity.options[
-                        dailyQuantity.selectedIndex
-                    ]?.textContent
-                    : "";
-
-
-            const days =
-                subscriptionDays
-                    ? subscriptionDays.value
-                    : "";
-
-
-            const totalQuantity =
-                monthlyQuantity
-                    ? monthlyQuantity.textContent
-                    : "--";
-
-
-            const totalAmount =
-                monthlyPrice
-                    ? monthlyPrice.textContent
-                    : "₹--";
-
-
-            const productName =
-                product?.name ||
-                "Product";
-
-
-            const message = `
-Hello, I want to start a subscription.
-
-Business:
-${siteData.businessName}
-
-Product:
-${productName}
-
-Daily Quantity:
-${quantity || "Please confirm"}
-
-Number of Days:
-${days}
-
-Total Quantity:
-${totalQuantity}
-
-Estimated Amount:
-${totalAmount}
-
-Customer Name:
-Delivery Area:
-Delivery Address:
-
-Please confirm my subscription.
-            `.trim();
-
-
-            const url =
-                createWhatsAppUrl(
-                    message
-                );
-
-
-            if (
-                url !== "#"
-            ) {
-
-                window.open(
-                    url,
-                    "_blank",
-                    "noopener,noreferrer"
-                );
-
-            }
-
-        }
-    );
 
 }
 
@@ -2169,7 +1458,632 @@ Please confirm my subscription.
    PART 3 END
 ========================================================= */
 /* =========================================================
-   17. CALL BUTTON
+   15. SUBSCRIPTION CALCULATOR
+========================================================= */
+
+function setupSubscription() {
+
+    const subscriptionProduct =
+        getElement(
+            "subscription-product"
+        );
+
+    const dailyQuantity =
+        getElement(
+            "daily-quantity"
+        );
+
+    const subscriptionDays =
+        getElement(
+            "subscription-days"
+        );
+
+    const monthlyQuantity =
+        getElement(
+            "monthly-quantity"
+        );
+
+    const monthlyPrice =
+        getElement(
+            "monthly-price"
+        );
+
+
+    /* -----------------------------------------------------
+       CALCULATE SUBSCRIPTION
+    ----------------------------------------------------- */
+
+    function calculateSubscription() {
+
+        if (
+            !subscriptionProduct ||
+            !dailyQuantity ||
+            !subscriptionDays ||
+            !monthlyQuantity ||
+            !monthlyPrice
+        ) {
+
+            return;
+
+        }
+
+
+        const productKey =
+            subscriptionProduct.value;
+
+
+        const quantity =
+            Number(
+                dailyQuantity.value
+            );
+
+
+        const days =
+            Number(
+                subscriptionDays.value
+            );
+
+
+        const product =
+            siteData.products?.[
+                productKey
+            ];
+
+
+        if (
+            !product ||
+            !Number.isFinite(quantity) ||
+            !Number.isFinite(days) ||
+            quantity <= 0 ||
+            days <= 0
+        ) {
+
+            monthlyQuantity.textContent =
+                "--";
+
+            monthlyPrice.textContent =
+                "₹--";
+
+            return;
+
+        }
+
+
+        /* -------------------------------------------------
+           PRODUCT PRICE
+        ------------------------------------------------- */
+
+        let price =
+            Number(
+                product.price
+            );
+
+
+        /* MILK PRICE */
+
+        if (
+            productKey === "milk"
+        ) {
+
+            const selectedVariant =
+                getSelectedMilkVariant();
+
+            price =
+                selectedVariant ===
+                    "Buffalo Milk"
+                    ? Number(
+                        product.buffaloMilkPrice
+                    ) || 75
+                    : Number(
+                        product.cowMilkPrice
+                    ) || 65;
+
+        }
+
+
+        if (
+            !Number.isFinite(price) ||
+            price <= 0
+        ) {
+
+            monthlyQuantity.textContent =
+                "--";
+
+            monthlyPrice.textContent =
+                "₹--";
+
+            return;
+
+        }
+
+
+        /* -------------------------------------------------
+           TOTAL QUANTITY
+        ------------------------------------------------- */
+
+        const totalQuantity =
+            quantity * days;
+
+
+        /* -------------------------------------------------
+           TOTAL PRICE
+        ------------------------------------------------- */
+
+        const totalAmount =
+            totalQuantity * price;
+
+
+        /* -------------------------------------------------
+           UNIT
+        ------------------------------------------------- */
+
+        let unit = "";
+
+
+        if (
+            productKey === "milk" ||
+            productKey === "buttermilk"
+        ) {
+
+            unit = "L";
+
+        }
+
+
+        if (
+            productKey === "curd"
+        ) {
+
+            unit = "Kg";
+
+        }
+
+
+        /* -------------------------------------------------
+           SHOW RESULT
+        ------------------------------------------------- */
+
+        monthlyQuantity.textContent =
+            `${totalQuantity.toFixed(2)} ${unit}`;
+
+
+        monthlyPrice.textContent =
+            `₹${totalAmount.toLocaleString(
+                "en-IN",
+                {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }
+            )}`;
+
+    }
+
+
+    /* -----------------------------------------------------
+       UPDATE QUANTITY OPTIONS
+    ----------------------------------------------------- */
+
+    function updateSubscriptionQuantityOptions() {
+
+        if (
+            !subscriptionProduct ||
+            !dailyQuantity
+        ) {
+
+            return;
+
+        }
+
+
+        const productKey =
+            subscriptionProduct.value;
+
+
+        let options = [];
+
+
+        if (
+            productKey === "milk"
+        ) {
+
+            options = [
+
+                {
+                    value: "0.5",
+                    text: "500 ml"
+                },
+
+                {
+                    value: "1",
+                    text: "1 Litre"
+                },
+
+                {
+                    value: "2",
+                    text: "2 Litres"
+                }
+
+            ];
+
+        }
+
+
+        if (
+            productKey === "curd"
+        ) {
+
+            options = [
+
+                {
+                    value: "0.25",
+                    text: "250 g"
+                },
+
+                {
+                    value: "0.5",
+                    text: "500 g"
+                },
+
+                {
+                    value: "1",
+                    text: "1 Kg"
+                }
+
+            ];
+
+        }
+
+
+        if (
+            productKey === "buttermilk"
+        ) {
+
+            options = [
+
+                {
+                    value: "0.25",
+                    text: "250 ml"
+                },
+
+                {
+                    value: "0.5",
+                    text: "500 ml"
+                },
+
+                {
+                    value: "1",
+                    text: "1 Litre"
+                }
+
+            ];
+
+        }
+
+
+        dailyQuantity.innerHTML =
+            "";
+
+
+        options.forEach(
+            (option) => {
+
+                const element =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                element.value =
+                    option.value;
+
+
+                element.textContent =
+                    option.text;
+
+
+                dailyQuantity.appendChild(
+                    element
+                );
+
+            }
+        );
+
+
+        calculateSubscription();
+
+    }
+
+
+    /* -----------------------------------------------------
+       EVENTS
+    ----------------------------------------------------- */
+
+    if (subscriptionProduct) {
+
+        subscriptionProduct.addEventListener(
+            "change",
+            updateSubscriptionQuantityOptions
+        );
+
+    }
+
+
+    if (dailyQuantity) {
+
+        dailyQuantity.addEventListener(
+            "change",
+            calculateSubscription
+        );
+
+    }
+
+
+    if (subscriptionDays) {
+
+        subscriptionDays.addEventListener(
+            "input",
+            calculateSubscription
+        );
+
+    }
+
+
+    /* -----------------------------------------------------
+       SUBSCRIPTION WHATSAPP BUTTON
+    ----------------------------------------------------- */
+
+    const whatsappButton =
+        getElement(
+            "subscription-whatsapp-button"
+        );
+
+
+    if (whatsappButton) {
+
+        whatsappButton.addEventListener(
+            "click",
+            () => {
+
+                calculateSubscription();
+
+
+                const modal =
+                    getElement(
+                        "subscription-customer-modal"
+                    );
+
+
+                if (modal) {
+
+                    modal.style.display =
+                        "flex";
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* -----------------------------------------------------
+       CANCEL SUBSCRIPTION
+    ----------------------------------------------------- */
+
+    const cancelButton =
+        getElement(
+            "subscription-cancel-button"
+        );
+
+
+    if (cancelButton) {
+
+        cancelButton.addEventListener(
+            "click",
+            () => {
+
+                const modal =
+                    getElement(
+                        "subscription-customer-modal"
+                    );
+
+
+                if (modal) {
+
+                    modal.style.display =
+                        "none";
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* -----------------------------------------------------
+       CONFIRM SUBSCRIPTION
+    ----------------------------------------------------- */
+
+    const confirmButton =
+        getElement(
+            "subscription-confirm-button"
+        );
+
+
+    if (confirmButton) {
+
+        confirmButton.addEventListener(
+            "click",
+            () => {
+
+                const customerName =
+                    getElement(
+                        "subscription-customer-name"
+                    )?.value.trim();
+
+
+                const customerMobile =
+                    getElement(
+                        "subscription-customer-mobile"
+                    )?.value.trim();
+
+
+                const customerArea =
+                    getElement(
+                        "subscription-customer-area"
+                    )?.value.trim();
+
+
+                const customerAddress =
+                    getElement(
+                        "subscription-customer-address"
+                    )?.value.trim();
+
+
+                const customerLandmark =
+                    getElement(
+                        "subscription-customer-landmark"
+                    )?.value.trim();
+
+
+                if (
+                    !customerName ||
+                    !customerMobile ||
+                    !customerArea ||
+                    !customerAddress
+                ) {
+
+                    alert(
+                        "Please fill all required details."
+                    );
+
+                    return;
+
+                }
+
+
+                calculateSubscription();
+
+
+                const productKey =
+                    subscriptionProduct
+                        ? subscriptionProduct.value
+                        : "milk";
+
+
+                const product =
+                    siteData.products?.[
+                        productKey
+                    ];
+
+
+                const productName =
+                    product?.name ||
+                    "Product";
+
+
+                const quantity =
+                    dailyQuantity
+                        ? dailyQuantity.options[
+                            dailyQuantity.selectedIndex
+                        ]?.textContent
+                        : "";
+
+
+                const days =
+                    subscriptionDays
+                        ? subscriptionDays.value
+                        : "";
+
+
+                const totalQuantity =
+                    monthlyQuantity
+                        ? monthlyQuantity.textContent
+                        : "--";
+
+
+                const totalAmount =
+                    monthlyPrice
+                        ? monthlyPrice.textContent
+                        : "₹--";
+
+
+                const message = `
+Hello, I want to start a subscription from ${siteData.businessName}.
+
+Product: ${productName}
+
+Daily Quantity: ${quantity || "Please confirm"}
+
+Number of Days: ${days}
+
+Total Quantity: ${totalQuantity}
+
+Estimated Amount: ${totalAmount}
+
+Customer Name: ${customerName}
+Mobile Number: ${customerMobile}
+Delivery Area: ${customerArea}
+Delivery Address: ${customerAddress}
+${customerLandmark
+    ? `Landmark: ${customerLandmark}`
+    : ""}
+
+Please confirm my subscription.
+                `.trim();
+
+
+                const url =
+                    createWhatsAppUrl(
+                        message
+                    );
+
+
+                if (url !== "#") {
+
+                    window.open(
+                        url,
+                        "_blank",
+                        "noopener,noreferrer"
+                    );
+
+                }
+
+
+                const modal =
+                    getElement(
+                        "subscription-customer-modal"
+                    );
+
+
+                if (modal) {
+
+                    modal.style.display =
+                        "none";
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* -----------------------------------------------------
+       INITIAL CALCULATION
+    ----------------------------------------------------- */
+
+    updateSubscriptionQuantityOptions();
+
+}
+
+
+/* =========================================================
+   PART 4 END
+========================================================= */
+/* =========================================================
+   16. CALL BUTTON
 ========================================================= */
 
 function setupCallButton() {
@@ -2177,27 +2091,21 @@ function setupCallButton() {
     const callButton =
         getElement("call-button");
 
-
     if (
         !callButton ||
         !siteData.phoneNumber
     ) {
-
         return;
-
     }
-
 
     const phone =
         cleanPhoneNumber(
             siteData.phoneNumber
         );
 
-
     if (!phone) {
         return;
     }
-
 
     callButton.href =
         `tel:${phone}`;
@@ -2206,7 +2114,7 @@ function setupCallButton() {
 
 
 /* =========================================================
-   18. INSTAGRAM
+   17. INSTAGRAM
 ========================================================= */
 
 function setupInstagram() {
@@ -2215,7 +2123,6 @@ function setupInstagram() {
         getElement(
             "instagram-handle"
         );
-
 
     if (
         instagramHandle &&
@@ -2234,7 +2141,6 @@ function setupInstagram() {
         document.querySelector(
             '.footer-contact a[href*="instagram"]'
         );
-
 
     if (
         footerInstagram &&
@@ -2256,7 +2162,7 @@ function setupInstagram() {
 
 
 /* =========================================================
-   19. GOOGLE MAPS
+   18. GOOGLE MAPS
 ========================================================= */
 
 function setupGoogleMaps() {
@@ -2266,11 +2172,9 @@ function setupGoogleMaps() {
             "google-maps-link"
         );
 
-
     if (!mapButton) {
         return;
     }
-
 
     if (
         siteData.googleMapsLink &&
@@ -2304,16 +2208,71 @@ function setupGoogleMaps() {
 
 
 /* =========================================================
-   20. PAYMENT COPY
+   19. PAYMENT INFORMATION
 ========================================================= */
 
-const copyPaymentButton =
-    getElement(
-        "copy-payment-button"
-    );
+function loadPaymentInformation() {
+
+    const paymentNumber =
+        getElement(
+            "payment-number"
+        );
+
+    const upiId =
+        getElement(
+            "upi-id"
+        );
 
 
-if (copyPaymentButton) {
+    const validPayment =
+        siteData.paymentNumber &&
+        siteData.paymentNumber !==
+            "PAYMENT_NUMBER";
+
+
+    const validUpi =
+        siteData.upiId &&
+        siteData.upiId !==
+            "UPI_ID";
+
+
+    if (paymentNumber) {
+
+        paymentNumber.textContent =
+            validPayment
+                ? siteData.paymentNumber
+                : "Payment details coming soon.";
+
+    }
+
+
+    if (upiId) {
+
+        upiId.textContent =
+            validUpi
+                ? siteData.upiId
+                : "UPI details coming soon.";
+
+    }
+
+}
+
+
+/* =========================================================
+   20. PAYMENT COPY BUTTON
+========================================================= */
+
+function setupPaymentCopy() {
+
+    const copyPaymentButton =
+        getElement(
+            "copy-payment-button"
+        );
+
+    if (!copyPaymentButton) {
+        return;
+    }
+
 
     copyPaymentButton.addEventListener(
         "click",
@@ -2386,59 +2345,7 @@ if (copyPaymentButton) {
 
 
 /* =========================================================
-   21. PAYMENT INFORMATION
-========================================================= */
-
-function loadPaymentInformation() {
-
-    const paymentNumber =
-        getElement(
-            "payment-number"
-        );
-
-
-    const upiId =
-        getElement(
-            "upi-id"
-        );
-
-
-    const validPayment =
-        siteData.paymentNumber &&
-        siteData.paymentNumber !==
-            "PAYMENT_NUMBER";
-
-
-    const validUpi =
-        siteData.upiId &&
-        siteData.upiId !==
-            "UPI_ID";
-
-
-    if (paymentNumber) {
-
-        paymentNumber.textContent =
-            validPayment
-                ? siteData.paymentNumber
-                : "Payment details coming soon.";
-
-    }
-
-
-    if (upiId) {
-
-        upiId.textContent =
-            validUpi
-                ? siteData.upiId
-                : "UPI details coming soon.";
-
-    }
-
-}
-
-
-/* =========================================================
-   22. DELIVERY AREAS
+   21. DELIVERY AREAS
 ========================================================= */
 
 function loadDeliveryAreas() {
@@ -2447,7 +2354,6 @@ function loadDeliveryAreas() {
         getElement(
             "delivery-areas"
         );
-
 
     if (!deliveryAreas) {
         return;
@@ -2506,7 +2412,7 @@ function loadDeliveryAreas() {
 
 
 /* =========================================================
-   23. BOTTLE INFORMATION
+   22. BOTTLE INFORMATION
 ========================================================= */
 
 function setupBottleSection() {
@@ -2515,7 +2421,6 @@ function setupBottleSection() {
         document.querySelector(
             ".bottle-section"
         );
-
 
     if (!bottleSection) {
         return;
@@ -2576,7 +2481,9 @@ function setupBottleSection() {
 
 
 /* =========================================================
-   24. OFFERS
+   PART 5 END
+========================================================= *//* =========================================================
+   23. OFFERS
 ========================================================= */
 
 function setupOffers() {
@@ -2586,7 +2493,6 @@ function setupOffers() {
             ".offer-card"
         );
 
-
     if (!offerCards.length) {
         return;
     }
@@ -2594,7 +2500,6 @@ function setupOffers() {
 
     const offers =
         siteData.offers;
-
 
     if (!offers) {
         return;
@@ -2623,7 +2528,6 @@ function setupOffers() {
                 offerCards[0].querySelector(
                     "h3"
                 );
-
 
             const paragraph =
                 offerCards[0].querySelector(
@@ -2680,7 +2584,6 @@ function setupOffers() {
                     "h3"
                 );
 
-
             const paragraph =
                 offerCards[1].querySelector(
                     "p"
@@ -2716,7 +2619,7 @@ function setupOffers() {
 
 
 /* =========================================================
-   25. IMAGE FALLBACK
+   24. IMAGE FALLBACKS
 ========================================================= */
 
 function setupImageFallbacks() {
@@ -2743,7 +2646,7 @@ function setupImageFallbacks() {
 
 
 /* =========================================================
-   26. SMOOTH NAVIGATION
+   25. SMOOTH NAVIGATION
 ========================================================= */
 
 function setupSmoothNavigation() {
@@ -2804,12 +2707,14 @@ function setupSmoothNavigation() {
 
 
 /* =========================================================
-   27. FINAL INITIALIZATION
+   26. FINAL INITIALIZATION
 ========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
     () => {
+
+        setupMobileMenu();
 
         loadBusinessInformation();
 
@@ -2825,8 +2730,6 @@ document.addEventListener(
 
         loadWebsiteImages();
 
-        loadPaymentInformation();
-
         setupWhatsAppButtons();
 
         setupProductOrderButtons();
@@ -2839,15 +2742,17 @@ document.addEventListener(
 
         loadGheeVariantPrice();
 
-        updateSubscriptionQuantityOptions();
-
-        calculateSubscription();
+        setupSubscription();
 
         setupCallButton();
 
         setupInstagram();
 
         setupGoogleMaps();
+
+        loadPaymentInformation();
+
+        setupPaymentCopy();
 
         loadDeliveryAreas();
 
@@ -2864,5 +2769,552 @@ document.addEventListener(
 
 
 /* =========================================================
-   SCRIPT.JS COMPLETE
+   JHALAWAR ORGANIC MILK - SCRIPT COMPLETE
 ========================================================= */
+/* =========================================================
+   CUSTOMER FEEDBACK SYSTEM - SUPABASE
+========================================================= */
+
+function setupFeedback() {
+
+    const stars =
+        document.querySelectorAll(
+            "#feedback-stars button"
+        );
+
+    const submitButton =
+        document.getElementById(
+            "submit-feedback-button"
+        );
+
+    const nameInput =
+        document.getElementById(
+            "feedback-name"
+        );
+
+    const messageInput =
+        document.getElementById(
+            "feedback-message"
+        );
+
+    const feedbackList =
+        document.getElementById(
+            "feedback-list"
+        );
+
+    const averageElement =
+        document.getElementById(
+            "feedback-average"
+        );
+
+    const countElement =
+        document.getElementById(
+            "feedback-count"
+        );
+
+    const filterButtons =
+        document.querySelectorAll(
+            ".feedback-filter-button"
+        );
+
+
+    if (
+        !stars.length ||
+        !submitButton ||
+        !nameInput ||
+        !messageInput ||
+        !feedbackList
+    ) {
+        return;
+    }
+
+
+    let selectedRating = 0;
+
+    let activeFilter = "all";
+
+    let reviews = [];
+
+
+    /* =====================================================
+       LOAD APPROVED REVIEWS FROM SUPABASE
+    ===================================================== */
+
+    async function loadReviews() {
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+            .from("feedback")
+            .select(
+                "id, created_at, name, rating, message"
+            )
+            .eq(
+                "approved",
+                true
+            )
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
+
+
+        if (error) {
+
+            console.error(
+                "Could not load feedback:",
+                error
+            );
+
+            feedbackList.innerHTML = `
+                <div class="feedback-empty">
+                    <span>⚠️</span>
+                    <h4>Reviews load nahi ho paaye</h4>
+                    <p>Please thodi der baad try karein.</p>
+                </div>
+            `;
+
+            return;
+        }
+
+
+        reviews = data || [];
+
+        renderReviews();
+
+    }
+
+
+    /* =====================================================
+       STAR SELECTION
+    ===================================================== */
+
+    stars.forEach(
+        (star) => {
+
+            star.addEventListener(
+                "click",
+                () => {
+
+                    selectedRating =
+                        Number(
+                            star.dataset.rating
+                        );
+
+
+                    stars.forEach(
+                        (item) => {
+
+                            const rating =
+                                Number(
+                                    item.dataset.rating
+                                );
+
+
+                            item.classList.toggle(
+                                "active",
+                                rating <= selectedRating
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       SUBMIT FEEDBACK
+    ===================================================== */
+
+    submitButton.addEventListener(
+        "click",
+        async () => {
+
+            const name =
+                nameInput.value.trim();
+
+            const message =
+                messageInput.value.trim();
+
+
+            if (!name) {
+
+                alert(
+                    "Please apna naam likhein."
+                );
+
+                nameInput.focus();
+
+                return;
+
+            }
+
+
+            if (!selectedRating) {
+
+                alert(
+                    "Please rating select karein."
+                );
+
+                return;
+
+            }
+
+
+            if (!message) {
+
+                alert(
+                    "Please apna feedback likhein."
+                );
+
+                messageInput.focus();
+
+                return;
+
+            }
+
+
+            submitButton.disabled =
+                true;
+
+            submitButton.textContent =
+                "Submitting...";
+
+
+            const {
+                error
+            } = await supabaseClient
+                .from("feedback")
+                .insert([
+                    {
+                        name: name,
+                        rating: selectedRating,
+                        message: message
+                    }
+                ]);
+
+
+            if (error) {
+
+                console.error(
+                    "Feedback submission failed:",
+                    error
+                );
+
+                alert(
+                    "Feedback submit nahi ho paaya. Please dobara try karein."
+                );
+
+                submitButton.disabled =
+                    false;
+
+                submitButton.textContent =
+                    "Submit Feedback";
+
+                return;
+
+            }
+
+
+            nameInput.value =
+                "";
+
+            messageInput.value =
+                "";
+
+            selectedRating =
+                0;
+
+
+            stars.forEach(
+                (star) => {
+
+                    star.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+
+            submitButton.disabled =
+                false;
+
+            submitButton.textContent =
+                "Submit Feedback";
+
+
+            alert(
+                "Thank you! Aapka feedback submit ho gaya. ❤️\n\nAdmin approval ke baad review website par dikhega."
+            );
+
+
+            activeFilter =
+                "all";
+
+
+            filterButtons.forEach(
+                (button) => {
+
+                    button.classList.toggle(
+                        "active",
+                        button.dataset.filter === "all"
+                    );
+
+                }
+            );
+
+
+            await loadReviews();
+
+        }
+    );
+
+
+    /* =====================================================
+       FILTER
+    ===================================================== */
+
+    filterButtons.forEach(
+        (button) => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    activeFilter =
+                        button.dataset.filter;
+
+
+                    filterButtons.forEach(
+                        (item) => {
+
+                            item.classList.toggle(
+                                "active",
+                                item === button
+                            );
+
+                        }
+                    );
+
+
+                    renderReviews();
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       RENDER REVIEWS
+    ===================================================== */
+
+    function renderReviews() {
+
+        let filteredReviews =
+            reviews;
+
+
+        if (
+            activeFilter !== "all"
+        ) {
+
+            filteredReviews =
+                reviews.filter(
+                    (review) =>
+                        Number(
+                            review.rating
+                        ) ===
+                        Number(
+                            activeFilter
+                        )
+                );
+
+        }
+
+
+        if (
+            !filteredReviews.length
+        ) {
+
+            feedbackList.innerHTML = `
+                <div class="feedback-empty">
+
+                    <span>⭐</span>
+
+                    <h4>
+                        Abhi tak koi approved review nahi hai
+                    </h4>
+
+                    <p>
+                        Sabse pehla feedback aap de sakte hain.
+                    </p>
+
+                </div>
+            `;
+
+        } else {
+
+            feedbackList.innerHTML =
+                filteredReviews
+                    .map(
+                        (review) => {
+
+                            const rating =
+                                Number(
+                                    review.rating
+                                );
+
+
+                            const starsHTML =
+                                "★".repeat(
+                                    rating
+                                ) +
+                                "☆".repeat(
+                                    5 - rating
+                                );
+
+
+                            return `
+                                <div class="feedback-card">
+
+                                    <div class="feedback-card-top">
+
+                                        <div class="feedback-card-name">
+                                            ${escapeHTML(
+                                                review.name
+                                            )}
+                                        </div>
+
+                                        <div class="feedback-card-stars">
+                                            ${starsHTML}
+                                        </div>
+
+                                    </div>
+
+                                    <p>
+                                        ${escapeHTML(
+                                            review.message
+                                        )}
+                                    </p>
+
+                                </div>
+                            `;
+
+                        }
+                    )
+                    .join("");
+
+        }
+
+
+        updateSummary();
+
+    }
+
+
+    /* =====================================================
+       RATING SUMMARY
+    ===================================================== */
+
+    function updateSummary() {
+
+        const count =
+            reviews.length;
+
+
+        if (!count) {
+
+            if (averageElement) {
+                averageElement.textContent =
+                    "0.0 ⭐";
+            }
+
+            if (countElement) {
+                countElement.textContent =
+                    "0 Reviews";
+            }
+
+            return;
+
+        }
+
+
+        const total =
+            reviews.reduce(
+                (sum, review) =>
+                    sum +
+                    Number(
+                        review.rating
+                    ),
+                0
+            );
+
+
+        const average =
+            (
+                total /
+                count
+            ).toFixed(1);
+
+
+        if (averageElement) {
+
+            averageElement.textContent =
+                `${average} ⭐`;
+
+        }
+
+
+        if (countElement) {
+
+            countElement.textContent =
+                `${count} ${
+                    count === 1
+                        ? "Review"
+                        : "Reviews"
+                }`;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       SECURITY
+    ===================================================== */
+
+    function escapeHTML(text) {
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+        div.textContent =
+            text;
+
+        return div.innerHTML;
+
+    }
+
+
+    /* =====================================================
+       INITIAL LOAD
+    ===================================================== */
+
+    loadReviews();
+
+}
+
+
+setupFeedback();

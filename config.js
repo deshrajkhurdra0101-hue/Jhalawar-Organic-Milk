@@ -1,5 +1,8 @@
 const businessConfig = {
-
+supabase: {
+    url: "https://wulcdmfqqgduytsirrwg.supabase.co",
+    key: "sb_publishable_wCNTVIOAsKo_UVcCKxCQbQ_k07pAiKF"
+},
     /* =====================================================
        BUSINESS DETAILS
     ===================================================== */

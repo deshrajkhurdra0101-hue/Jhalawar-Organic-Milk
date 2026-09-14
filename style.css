@@ -3826,3 +3826,677 @@ section {
     color: var(--white);
     background: var(--green-800);
 }
+/* =========================================================
+   29. CUSTOMER ORDER & SUBSCRIPTION MODALS
+========================================================= */
+
+#customer-order-modal,
+#subscription-customer-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 18px;
+
+    background: rgba(16, 41, 28, 0.72);
+
+    backdrop-filter: blur(8px);
+}
+
+
+/* MODAL BOX */
+
+#customer-order-modal > div,
+#subscription-customer-modal > div {
+    width: min(100%, 520px);
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 26px 22px;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+    border-radius: 26px;
+
+    box-shadow: 0 30px 90px rgba(16, 41, 28, 0.28);
+
+    animation: modalSlideUp 0.25s ease;
+}
+
+
+/* MODAL TITLE */
+
+#customer-order-modal h3,
+#subscription-customer-modal h3 {
+    margin-bottom: 7px;
+
+    color: var(--green-900);
+
+    font-size: 1.45rem;
+    line-height: 1.2;
+}
+
+
+/* MODAL DESCRIPTION */
+
+#customer-order-modal p,
+#subscription-customer-modal p {
+    margin-bottom: 20px;
+
+    color: var(--text-mid);
+
+    font-size: 0.84rem;
+    line-height: 1.6;
+}
+
+
+/* MODAL INPUTS */
+
+#customer-order-modal input,
+#customer-order-modal textarea,
+#subscription-customer-modal input,
+#subscription-customer-modal textarea {
+
+    width: 100%;
+
+    margin-bottom: 12px;
+
+    padding: 13px 14px;
+
+    border: 1px solid rgba(35, 70, 48, 0.15);
+
+    border-radius: 14px;
+
+    outline: none;
+
+    color: var(--green-900);
+
+    background: #fffdf9;
+
+    font-size: 0.88rem;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+#customer-order-modal textarea,
+#subscription-customer-modal textarea {
+
+    min-height: 90px;
+
+    resize: vertical;
+}
+
+
+/* INPUT FOCUS */
+
+#customer-order-modal input:focus,
+#customer-order-modal textarea:focus,
+#subscription-customer-modal input:focus,
+#subscription-customer-modal textarea:focus {
+
+    border-color: var(--green-700);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(45, 90, 61, 0.09);
+}
+
+
+/* MODAL BUTTON AREA */
+
+#customer-order-modal button,
+#subscription-customer-modal button {
+
+    min-height: 48px;
+
+    padding: 11px 18px;
+
+    border-radius: 12px;
+
+    font-weight: 800;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+
+#customer-order-modal button:hover,
+#subscription-customer-modal button:hover {
+
+    transform: translateY(-1px);
+}
+
+
+/* CANCEL BUTTON */
+
+#cancel-order-button,
+#subscription-cancel-button {
+
+    color: var(--green-800);
+
+    background: var(--cream-200);
+}
+
+
+/* CONFIRM BUTTON */
+
+#confirm-order-button,
+#subscription-confirm-button {
+
+    color: var(--white);
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--green-800),
+            var(--green-950)
+        );
+
+    box-shadow:
+        0 10px 24px
+        rgba(24, 58, 40, 0.16);
+}
+
+
+/* MODAL ANIMATION */
+
+@keyframes modalSlideUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/* SMALL MOBILE */
+
+@media (max-width: 480px) {
+
+    #customer-order-modal,
+    #subscription-customer-modal {
+
+        padding: 12px;
+    }
+
+
+    #customer-order-modal > div,
+    #subscription-customer-modal > div {
+
+        padding: 22px 17px;
+
+        border-radius: 22px;
+
+        max-height: 92vh;
+    }
+
+
+    #customer-order-modal h3,
+    #subscription-customer-modal h3 {
+
+        font-size: 1.25rem;
+    }
+
+
+    #customer-order-modal button,
+    #subscription-customer-modal button {
+
+        width: 100%;
+
+        margin-top: 7px;
+    }
+
+}
+/* =========================================================
+   29. CUSTOMER FEEDBACK
+========================================================= */
+
+.feedback-section {
+    padding: 76px 0;
+    background: linear-gradient(
+        180deg,
+        #ffffff,
+        #fffaf0
+    );
+}
+
+
+/* FEEDBACK FORM */
+
+.feedback-form-card {
+    width: min(
+        calc(100% - 32px),
+        620px
+    );
+
+    margin: 0 auto 55px;
+
+    padding: 28px 22px;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: 26px;
+
+    box-shadow: var(--shadow-md);
+}
+
+
+.feedback-form-card h3 {
+    margin-bottom: 6px;
+
+    color: var(--green-900);
+
+    font-size: 1.45rem;
+}
+
+
+.feedback-form-note {
+    margin-bottom: 22px;
+
+    color: var(--text-mid);
+
+    font-size: 0.82rem;
+}
+
+
+/* RATING */
+
+.feedback-rating {
+    margin-bottom: 20px;
+}
+
+
+.feedback-rating label,
+.feedback-form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--green-900);
+
+    font-size: 0.8rem;
+
+    font-weight: 800;
+}
+
+
+.star-rating {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+
+.star-rating button {
+    width: 40px;
+    height: 40px;
+
+    padding: 0;
+
+    border-radius: 10px;
+
+    color: #cfcfcf;
+
+    background: var(--cream-50);
+
+    font-size: 1.5rem;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.star-rating button:hover,
+.star-rating button.active {
+    color: var(--gold-500);
+
+    background: var(--cream-100);
+
+    transform: translateY(-2px);
+}
+
+
+/* INPUTS */
+
+.feedback-form-group {
+    margin-bottom: 17px;
+}
+
+
+.feedback-form-group input,
+.feedback-form-group textarea {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border: 1px solid
+        rgba(35, 70, 48, 0.14);
+
+    border-radius: 14px;
+
+    outline: none;
+
+    color: var(--green-900);
+
+    background: #fffdf9;
+
+    font-size: 0.88rem;
+}
+
+
+.feedback-form-group textarea {
+    min-height: 110px;
+
+    resize: vertical;
+}
+
+
+.feedback-form-group input:focus,
+.feedback-form-group textarea:focus {
+    border-color: var(--green-700);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(45, 90, 61, 0.09);
+}
+
+
+/* REVIEWS AREA */
+
+.feedback-reviews {
+    width: min(
+        calc(100% - 32px),
+        1000px
+    );
+
+    margin: 0 auto;
+}
+
+
+.feedback-reviews-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+}
+
+
+.feedback-reviews-header h3 {
+    margin-top: 3px;
+
+    color: var(--green-900);
+
+    font-size: 1.45rem;
+}
+
+
+.feedback-summary {
+    flex: 0 0 auto;
+
+    padding: 13px 16px;
+
+    text-align: center;
+
+    border-radius: 16px;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    box-shadow: var(--shadow-sm);
+}
+
+
+.feedback-summary strong {
+    display: block;
+
+    color: var(--green-900);
+
+    font-size: 1.1rem;
+}
+
+
+.feedback-summary span {
+    color: var(--text-light);
+
+    font-size: 0.7rem;
+}
+
+
+/* FILTER */
+
+.feedback-filter {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-bottom: 20px;
+
+    padding: 12px;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: 16px;
+
+    box-shadow: var(--shadow-sm);
+}
+
+
+.feedback-filter > span {
+    margin-right: 4px;
+
+    color: var(--green-900);
+
+    font-size: 0.75rem;
+
+    font-weight: 800;
+}
+
+
+.feedback-filter-button {
+    min-height: 36px;
+
+    padding: 7px 12px;
+
+    border: 1px solid
+        rgba(35, 70, 48, 0.13);
+
+    border-radius: 999px;
+
+    color: var(--green-800);
+
+    background: var(--cream-50);
+
+    font-size: 0.72rem;
+
+    font-weight: 800;
+}
+
+
+.feedback-filter-button.active {
+    color: var(--white);
+
+    background: var(--green-800);
+
+    border-color: var(--green-800);
+}
+
+
+/* REVIEW LIST */
+
+#feedback-list {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+}
+
+
+.feedback-card {
+    padding: 20px;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+
+    box-shadow: var(--shadow-sm);
+}
+
+
+.feedback-card-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 8px;
+}
+
+
+.feedback-card-name {
+    color: var(--green-900);
+
+    font-size: 0.95rem;
+
+    font-weight: 900;
+}
+
+
+.feedback-card-stars {
+    color: var(--gold-500);
+
+    font-size: 0.9rem;
+
+    letter-spacing: 1px;
+}
+
+
+.feedback-card p {
+    color: var(--text-mid);
+
+    font-size: 0.84rem;
+
+    line-height: 1.7;
+}
+
+
+/* EMPTY STATE */
+
+.feedback-empty {
+    padding: 35px 20px;
+
+    text-align: center;
+
+    background: var(--white);
+
+    border: 1px dashed
+        rgba(35, 70, 48, 0.18);
+
+    border-radius: 20px;
+}
+
+
+.feedback-empty > span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 2rem;
+}
+
+
+.feedback-empty h4 {
+    margin-bottom: 5px;
+
+    color: var(--green-900);
+
+    font-size: 1rem;
+}
+
+
+.feedback-empty p {
+    color: var(--text-light);
+
+    font-size: 0.78rem;
+}
+
+
+/* TABLET */
+
+@media (min-width: 600px) {
+
+    .feedback-form-card {
+        padding: 32px;
+    }
+
+    #feedback-list {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+
+    .feedback-reviews-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .feedback-summary {
+        width: 100%;
+    }
+
+    .feedback-form-card {
+        padding: 23px 17px;
+    }
+
+    .star-rating button {
+        width: 38px;
+        height: 38px;
+    }
+
+}
