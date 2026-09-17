@@ -4500,3 +4500,200 @@ section {
     }
 
 }
+/* ======================================================
+   PAYMENT QR & UPI
+====================================================== */
+
+.payment-qr-box {
+    margin-top: 24px;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #e5e5e5;
+    border-radius: 16px;
+}
+
+.payment-qr-title {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.payment-qr {
+    display: block;
+    width: 220px;
+    height: 220px;
+    object-fit: contain;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.payment-upi-button {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px 18px;
+    text-align: center;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.payment-instructions {
+    margin-top: 18px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #f7f7f7;
+}
+
+.payment-instructions p {
+    margin: 5px 0;
+}
+
+#copy-upi-button {
+    margin-top: 10px;
+    padding: 8px 14px;
+    border: 0;
+    border-radius: 7px;
+    cursor: pointer;
+}
+/* ======================================================
+   QR ONLY DISPLAY
+====================================================== */
+
+.payment-qr-box {
+    padding: 20px !important;
+    text-align: center;
+}
+
+.payment-qr-title,
+.payment-qr-box .small-note {
+    display: none !important;
+}
+
+.payment-qr {
+    display: block;
+    width: 300px !important;
+    height: 300px !important;
+    object-fit: contain;
+    margin: 0 auto !important;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 12px;
+}
+.payment-qr-title,
+.payment-qr-box .small-note {
+    display: none !important;
+}
+/* ======================================================
+   CUSTOMER PAYMENT FORM
+====================================================== */
+
+.customer-payment-form {
+    margin-top: 30px;
+    padding: 25px;
+    border-radius: 18px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.customer-payment-form h3 {
+    margin: 0 0 8px;
+    font-size: 24px;
+}
+
+.customer-payment-form > p {
+    margin-bottom: 22px;
+    color: #666;
+}
+
+.payment-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.customer-payment-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.customer-payment-form .form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.customer-payment-form label {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.customer-payment-form input,
+.customer-payment-form select,
+.customer-payment-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+.customer-payment-form input:focus,
+.customer-payment-form select:focus,
+.customer-payment-form textarea:focus {
+    border-color: #198754;
+    box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.12);
+}
+
+.customer-payment-form textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+#submit-payment-request-button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 13px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#submit-payment-request-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#payment-request-message {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    .customer-payment-form {
+        padding: 18px;
+    }
+
+    .payment-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .customer-payment-form .form-group.full-width {
+        grid-column: auto;
+    }
+
+    .customer-payment-form h3 {
+        font-size: 21px;
+    }
+}

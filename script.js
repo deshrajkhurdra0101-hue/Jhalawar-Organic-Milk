@@ -2342,7 +2342,189 @@ function setupPaymentCopy() {
     );
 
 }
+function setupUpiCopy() {
+    const copyUpiButton = getElement("copy-upi-button");
 
+    if (!copyUpiButton) return;
+
+    copyUpiButton.addEventListener("click", async () => {
+
+        const upiId = siteData.upiId;
+
+        if (!upiId || upiId === "UPI_ID") {
+            alert("UPI ID is not available yet.");
+            return;
+        }
+
+        try {
+            await navigator.clipboard.writeText(upiId);
+
+            const originalText = copyUpiButton.textContent;
+
+            copyUpiButton.textContent = "Copied!";
+
+            setTimeout(() => {
+                copyUpiButton.textContent = originalText || "Copy";
+            }, 1500);
+
+        } catch (error) {
+            console.error("Could not copy UPI ID:", error);
+            alert(`UPI ID: ${upiId}`);
+        }
+    });
+}
+// ======================================================
+// CUSTOMER PAYMENT REQUEST
+// ======================================================
+
+async function setupCustomerPaymentRequest() {
+    const submitButton = getElement("submit-payment-request-button");
+
+    if (!submitButton) return;
+
+    submitButton.addEventListener("click", async () => {
+
+        const customerName =
+            getElement("customer-payment-name")?.value.trim();
+
+        const mobile =
+            getElement("customer-payment-mobile")?.value.trim();
+
+        const orderId =
+            getElement("customer-payment-order-id")?.value.trim();
+
+        const productName =
+            getElement("customer-payment-product")?.value.trim();
+
+        const quantity =
+            getElement("customer-payment-quantity")?.value.trim();
+
+        const subscriptionType =
+            getElement("customer-payment-type")?.value;
+
+        const daysValue =
+            getElement("customer-payment-days")?.value;
+
+        const subscriptionDays =
+            daysValue ? Number(daysValue) : null;
+
+        const customerArea =
+            getElement("customer-payment-area")?.value.trim();
+
+        const customerAddress =
+            getElement("customer-payment-address")?.value.trim();
+
+        const customerLandmark =
+            getElement("customer-payment-landmark")?.value.trim();
+
+        const billAmount =
+            Number(getElement("customer-payment-bill-amount")?.value) || 0;
+
+        const paidAmount =
+            Number(getElement("customer-payment-paid-amount")?.value) || 0;
+
+        const paymentMethod =
+            getElement("customer-payment-method")?.value;
+
+        const transactionId =
+            getElement("customer-payment-transaction-id")?.value.trim();
+
+        const note =
+            getElement("customer-payment-note")?.value.trim();
+
+
+        // Basic validation
+        if (!customerName || !mobile || !paidAmount) {
+            alert("Please fill Customer Name, Mobile Number and Paid Amount.");
+            return;
+        }
+
+        if (paymentMethod === "UPI" && !transactionId) {
+            alert("For UPI payment, please enter Transaction ID / UTR.");
+            return;
+        }
+
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting...";
+
+
+        try {
+
+            const { error } = await supabaseClient
+                .from("payment_requests")
+                .insert([
+                    {
+                        customer_name: customerName,
+                        mobile: mobile,
+                        order_id: orderId,
+
+                        product_name: productName,
+                        quantity: quantity,
+
+                        subscription_type: subscriptionType,
+                        subscription_days: subscriptionDays,
+
+                        customer_area: customerArea,
+                        customer_address: customerAddress,
+                        customer_landmark: customerLandmark,
+
+                        bill_amount: billAmount,
+                        paid_amount: paidAmount,
+                        order_total: billAmount,
+
+                        payment_method: paymentMethod,
+                        transaction_id: transactionId,
+
+                        note: note,
+
+                        status: "Pending Approval"
+                    }
+                ]);
+
+
+            if (error) {
+                console.error("Payment request error:", error);
+                throw error;
+            }
+
+
+            const messageBox =
+                getElement("payment-request-message");
+
+            if (messageBox) {
+                messageBox.textContent =
+                    "Payment details submitted successfully. Your payment is pending verification.";
+            }
+
+
+            alert(
+                "Payment details submitted successfully! Your payment is now pending verification."
+            );
+
+
+            // Clear form
+            document
+                .querySelector(".customer-payment-form")
+                ?.reset();
+
+
+        } catch (error) {
+
+            console.error("Payment request failed:", error);
+
+            alert(
+                "Payment request could not be submitted. Please try again."
+            );
+
+        } finally {
+
+            submitButton.disabled = false;
+            submitButton.textContent = "Submit Payment Details";
+
+        }
+    });
+}
 
 /* =========================================================
    21. DELIVERY AREAS
@@ -2753,7 +2935,8 @@ document.addEventListener(
         loadPaymentInformation();
 
         setupPaymentCopy();
-
+setupCustomerPaymentRequest();
+setupUpiCopy();
         loadDeliveryAreas();
 
         setupBottleSection();

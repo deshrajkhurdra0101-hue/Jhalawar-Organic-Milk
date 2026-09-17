@@ -3115,6 +3115,7 @@ document.addEventListener(
          setupAdminFeedback();
          
         refreshDashboardStatus();
+        setupAdminPaymentRequests();
 
     }
 );
@@ -3130,6 +3131,327 @@ function escapeHTML(value) {
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
 
+}
+async function approvePaymentRequestAndAddLedger(request) {
+
+    if (!request || request.status !== "Pending Approval") {
+        return;
+    }
+
+    const { error: ledgerError } = await supabaseClient
+        .from("payment_ledger")
+        .insert([
+            {
+                customer_name: request.customer_name,
+                mobile: request.mobile,
+                bill_amount: request.bill_amount || 0,
+                paid_amount: request.paid_amount || 0,
+                payment_method: request.payment_method || "UPI",
+                payment_status: "Paid",
+                payment_date: new Date().toISOString().split("T")[0],
+                note: `Approved Payment Request | Order ID: ${request.order_id || "-"} | Transaction ID: ${request.transaction_id || "-"}`
+            }
+        ]);
+
+    if (ledgerError) {
+        console.error("Ledger insert error:", ledgerError);
+        alert("Payment could not be added to Payment Ledger.");
+        return;
+    }
+
+    const { error: requestError } = await supabaseClient
+        .from("payment_requests")
+        .update({
+            status: "Approved"
+        })
+        .eq("id", request.id)
+        .eq("status", "Pending Approval");
+
+    if (requestError) {
+        console.error("Payment request approval error:", requestError);
+        alert("Ledger entry added, but request status could not be updated.");
+        return;
+    }
+
+    alert("Payment approved and added to Payment Ledger.");
+
+    setupAdminPaymentRequests();
+}
+
+/* =========================================================
+   PAYMENT REQUESTS
+========================================================= */
+
+async function setupAdminPaymentRequests() {
+    const list = getElement("admin-payment-requests-list");
+
+    if (!list) return;
+
+    async function loadPaymentRequests() {
+        const { data, error } = await supabaseClient
+            .from("payment_requests")
+            .select("*")
+            .order("created_at", { ascending: false });
+
+        if (error) {
+            console.error("Payment requests error:", error);
+            list.innerHTML = "<p>Unable to load payment requests.</p>";
+            return;
+        }
+
+        const total = data.length;
+
+        const pending = data.filter(
+            item => item.status === "Pending Approval"
+        ).length;
+
+        const approved = data.filter(
+            item => item.status === "Approved"
+        ).length;
+
+        const rejected = data.filter(
+            item => item.status === "Rejected"
+        ).length;
+
+        const totalElement = getElement("payment-requests-total");
+        const pendingElement = getElement("payment-requests-pending");
+        const approvedElement = getElement("payment-requests-approved");
+        const rejectedElement = getElement("payment-requests-rejected");
+
+        if (totalElement) totalElement.textContent = total;
+        if (pendingElement) pendingElement.textContent = pending;
+        if (approvedElement) approvedElement.textContent = approved;
+        if (rejectedElement) rejectedElement.textContent = rejected;
+
+        if (!data.length) {
+            list.innerHTML = "<p>No payment requests found.</p>";
+            return;
+        }
+
+        list.innerHTML = data.map(request => `
+            <div class="admin-card payment-request-card">
+
+                <div class="payment-request-header">
+                    <div>
+                        <h3>${escapeHTML(request.customer_name || "Customer")}</h3>
+                        <p>${escapeHTML(request.mobile || "No mobile")}</p>
+                    </div>
+
+                    <strong>${escapeHTML(request.status || "Pending Approval")}</strong>
+                </div>
+
+                <div class="payment-request-details">
+
+                    <p>
+                        <strong>Order ID:</strong>
+                        ${escapeHTML(request.order_id || "-")}
+                    </p>
+
+                    <p>
+                        <strong>Product:</strong>
+                        ${escapeHTML(request.product_name || "-")}
+                    </p>
+
+                    <p>
+                        <strong>Quantity:</strong>
+                        ${escapeHTML(request.quantity || "-")}
+                    </p>
+
+                    <p>
+                        <strong>Subscription:</strong>
+                        ${escapeHTML(request.subscription_type || "-")}
+                    </p>
+
+                    <p>
+                        <strong>Days:</strong>
+                        ${request.subscription_days || "-"}
+                    </p>
+
+                    <p>
+                        <strong>Area:</strong>
+                        ${escapeHTML(request.customer_area || "-")}
+                    </p>
+
+                    <p>
+                        <strong>Address:</strong>
+                        ${escapeHTML(request.customer_address || "-")}
+                    </p>
+
+                    <p>
+                        <strong>Landmark:</strong>
+                        ${escapeHTML(request.customer_landmark || "-")}
+                    </p>
+
+                    <p>
+                        <strong>Bill Amount:</strong>
+                        ₹${Number(request.bill_amount || 0).toFixed(2)}
+                    </p>
+
+                    <p>
+                        <strong>Paid Amount:</strong>
+                        ₹${Number(request.paid_amount || 0).toFixed(2)}
+                    </p>
+
+                    <p>
+                        <strong>Payment Method:</strong>
+                        ${escapeHTML(request.payment_method || "-")}
+                    </p>
+
+                    <p>
+                        <strong>Transaction ID / UTR:</strong>
+                        ${escapeHTML(request.transaction_id || "-")}
+                    </p>
+
+                    <p>
+                        <strong>Note:</strong>
+                        ${escapeHTML(request.note || "-")}
+                    </p>
+
+                </div>
+
+                ${
+                    request.status === "Pending Approval"
+                    ? `
+                        <div class="payment-request-actions">
+
+                            <button
+                                class="save-button approve-payment-request"
+                                data-id="${request.id}"
+                            >
+                                Approve
+                            </button>
+
+                            <button
+                                class="delete-button reject-payment-request"
+                                data-id="${request.id}"
+                            >
+                                Reject
+                            </button>
+
+                        </div>
+                    `
+                    : ""
+                }
+
+            </div>
+        `).join("");
+
+        document
+    .querySelectorAll(".approve-payment-request")
+    .forEach(button => {
+        button.addEventListener("click", async () => {
+
+            const id = button.dataset.id;
+
+            const { data, error } = await supabaseClient
+                .from("payment_requests")
+                .select("*")
+                .eq("id", id)
+                .single();
+
+            if (error) {
+                console.error(
+                    "Payment request fetch error:",
+                    error
+                );
+
+                alert(
+                    "Payment request details could not be loaded."
+                );
+
+                return;
+            }
+
+            await approvePaymentRequestAndAddLedger(data);
+        });
+    });
+
+        document
+            .querySelectorAll(".reject-payment-request")
+            .forEach(button => {
+                button.addEventListener("click", () =>
+                    updatePaymentRequestStatus(
+                        button.dataset.id,
+                        "Rejected"
+                    )
+                );
+            });
+    }
+
+    async function updatePaymentRequestStatus(id, status) {
+
+        const confirmed = confirm(
+            `Are you sure you want to mark this payment request as ${status}?`
+        );
+
+        if (!confirmed) return;
+
+        const { error } = await supabaseClient
+            .from("payment_requests")
+            .update({ status })
+            .eq("id", id);
+
+        if (error) {
+            console.error("Payment request update error:", error);
+            alert("Could not update payment request.");
+            return;
+        }
+
+        alert(`Payment request marked as ${status}.`);
+
+        loadPaymentRequests();
+    }
+    
+
+    // SEARCH + FILTER
+    const searchInput = getElement("payment-request-search");
+    const statusFilter = getElement("payment-request-status-filter");
+
+    function filterPaymentRequests() {
+        const searchText =
+            searchInput?.value.trim().toLowerCase() || "";
+
+        const selectedStatus =
+            statusFilter?.value || "All";
+
+        document
+            .querySelectorAll(".payment-request-card")
+            .forEach(card => {
+
+                const cardText =
+                    card.textContent.toLowerCase();
+
+                const statusText =
+                    card.querySelector(
+                        ".payment-request-header > strong"
+                    )?.textContent.trim() || "";
+
+                const matchesSearch =
+                    !searchText ||
+                    cardText.includes(searchText);
+
+                const matchesStatus =
+                    selectedStatus === "All" ||
+                    statusText === selectedStatus;
+
+                card.style.display =
+                    matchesSearch && matchesStatus
+                        ? ""
+                        : "none";
+            });
+    }
+
+    searchInput?.addEventListener(
+        "input",
+        filterPaymentRequests
+    );
+
+    statusFilter?.addEventListener(
+        "change",
+        filterPaymentRequests
+    );
+
+    loadPaymentRequests();
 }
 /* =========================================================
    ADMIN FEEDBACK MANAGEMENT
