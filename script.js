@@ -141,10 +141,10 @@ function cleanPhoneNumber(number) {
 
 function createWhatsAppUrl(message) {
 
-    const phone =
-        cleanPhoneNumber(
-            siteData.whatsappNumber
-        );
+    const phone = 
+ cleanPhoneNumber(
+        siteData.whatsappNumber
+    );
 
     if (!phone) {
 
@@ -2502,7 +2502,37 @@ async function setupCustomerPaymentRequest() {
                 "Payment details submitted successfully! Your payment is now pending verification."
             );
 
+// SEND PAYMENT DETAILS TO OWNER ON WHATSAPP
 
+const whatsappMessage = `
+💳 PAYMENT CONFIRMATION
+
+Customer Name: ${customerName}
+Mobile Number: ${mobile}
+
+Product: ${productName || "Not provided"}
+Quantity: ${quantity || "Not provided"}
+Number of Days: ${subscriptionDays || "Not applicable"}
+
+Paid Amount: ₹${paidAmount}
+Payment Method: ${paymentMethod || "Not provided"}
+Transaction ID / UTR: ${transactionId || "Not provided"}
+
+Payment Status: Pending Verification
+
+Please verify this payment.
+`.trim();
+
+const whatsappUrl =
+    createWhatsAppUrl(whatsappMessage);
+
+if (whatsappUrl !== "#") {
+    window.open(
+        whatsappUrl,
+        "_blank",
+        "noopener,noreferrer"
+    );
+}
             // Clear form
             document
                 .querySelector(".customer-payment-form")

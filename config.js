@@ -42,7 +42,7 @@ upiId: "8890017418@ybl",
     shopAddress:
         "Jhalrapatan, Jhalawar, Rajasthan",
 
-    googleMapsLink: "",
+    googleMapsLink: " https://maps.app.goo.gl/ZgYbWxYCEt8MTyN58",
 
 
     /* =====================================================

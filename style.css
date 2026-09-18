@@ -4697,3 +4697,2133 @@ section {
         font-size: 21px;
     }
 }
+/* =========================================================
+   PREMIUM ANIMATION LAYER
+   Jhalawar Pure & Fresh Organic Milk
+   Safe Add-on — Existing CSS is NOT replaced
+   ========================================================= */
+
+/* ---------- 1. PAGE SMOOTHNESS ---------- */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+
+/* ---------- 2. PREMIUM BUTTON SHINE ---------- */
+
+.btn,
+button,
+.whatsapp-button,
+.primary-button,
+.secondary-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after,
+button::after,
+.whatsapp-button::after,
+.primary-button::after,
+.secondary-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(
+        100deg,
+        transparent,
+        rgba(255, 255, 255, 0.35),
+        transparent
+    );
+    transform: skewX(-20deg);
+    pointer-events: none;
+}
+
+.btn:hover::after,
+button:hover::after,
+.whatsapp-button:hover::after,
+.primary-button:hover::after,
+.secondary-button:hover::after {
+    animation: buttonShine 0.8s ease;
+}
+
+@keyframes buttonShine {
+    from {
+        left: -120%;
+    }
+
+    to {
+        left: 140%;
+    }
+}
+
+
+/* ---------- 3. HERO PREMIUM ENTRY ---------- */
+
+.hero-content {
+    animation: heroContentIn 0.9s ease both;
+}
+
+.hero-image-card {
+    animation: heroImageIn 1s ease 0.15s both;
+}
+
+@keyframes heroContentIn {
+    from {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroImageIn {
+    from {
+        opacity: 0;
+        transform: translateY(35px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* ---------- 4. HERO IMAGE FLOAT ---------- */
+
+.hero-image-card {
+    animation:
+        heroImageIn 1s ease 0.15s both,
+        heroFloat 5s ease-in-out 1.2s infinite;
+}
+
+@keyframes heroFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* ---------- 5. SECTION HEADINGS ---------- */
+
+.section-title,
+.section-heading,
+.section-subtitle {
+    transition:
+        transform 0.4s ease,
+        opacity 0.4s ease;
+}
+
+.section-title:hover,
+.section-heading:hover {
+    transform: translateY(-2px);
+}
+
+
+/* ---------- 6. FEATURE CARDS ---------- */
+
+.feature-card {
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease,
+        border-color 0.4s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.12),
+        0 0 0 1px rgba(46, 125, 50, 0.12);
+}
+
+.feature-card .feature-icon,
+.feature-card i {
+    transition:
+        transform 0.4s ease,
+        filter 0.4s ease;
+}
+
+.feature-card:hover .feature-icon,
+.feature-card:hover i {
+    transform: translateY(-5px) scale(1.08);
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.12));
+}
+
+
+/* ---------- 7. PRODUCT CARDS ---------- */
+
+.product-card {
+    transition:
+        transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+        box-shadow 0.45s ease,
+        border-color 0.35s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-9px);
+    box-shadow:
+        0 22px 45px rgba(0, 0, 0, 0.14),
+        0 8px 20px rgba(46, 125, 50, 0.10);
+}
+
+.product-card .product-image img {
+    transition:
+        transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+        filter 0.4s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.04);
+}
+
+.product-card:hover .product-image img {
+    filter: saturate(1.06);
+}
+
+
+/* ---------- 8. PRODUCT PRICE ---------- */
+
+.product-price {
+    transition:
+        transform 0.3s ease,
+        letter-spacing 0.3s ease;
+}
+
+.product-card:hover .product-price {
+    transform: translateY(-2px);
+    letter-spacing: 0.2px;
+}
+
+
+/* ---------- 9. GHEE TYPE BUTTONS ---------- */
+
+.ghee-types span {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background-color 0.3s ease;
+}
+
+.ghee-types span:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.10);
+}
+
+
+/* ---------- 10. MILK VARIANT BUTTONS ---------- */
+
+.variant-button {
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.3s ease,
+        background-color 0.3s ease;
+}
+
+.variant-button:hover {
+    transform: translateY(-2px);
+}
+
+.variant-button:active {
+    transform: scale(0.96);
+}
+
+
+/* ---------- 11. BOTTLE SECTION ---------- */
+
+.bottle-image img {
+    transition:
+        transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+        filter 0.5s ease;
+}
+
+.bottle-image:hover img {
+    transform: translateY(-8px) rotate(-1deg) scale(1.03);
+    filter: drop-shadow(0 18px 20px rgba(0, 0, 0, 0.14));
+}
+
+
+/* ---------- 12. BRAND BANNER ---------- */
+
+.brand-banner,
+.brand-banner-2 {
+    position: relative;
+    overflow: hidden;
+}
+
+.brand-banner::after,
+.brand-banner-2::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        110deg,
+        transparent 20%,
+        rgba(255, 255, 255, 0.12) 50%,
+        transparent 80%
+    );
+    transform: translateX(-100%);
+    pointer-events: none;
+}
+
+.brand-banner:hover::after,
+.brand-banner-2:hover::after {
+    animation: bannerSweep 1.2s ease;
+}
+
+@keyframes bannerSweep {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+
+/* ---------- 13. SUBSCRIPTION CARD ---------- */
+
+.subscription-card,
+.subscription-box {
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.subscription-card:hover,
+.subscription-box:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ---------- 14. DELIVERY CARD ---------- */
+
+.delivery-card {
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.delivery-card:hover {
+    transform: translateY(-6px);
+    box-shadow:
+        0 18px 38px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ---------- 15. STEPS ---------- */
+
+.step-card {
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-7px);
+    box-shadow:
+        0 18px 38px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ---------- 16. OFFER CARDS ---------- */
+
+.offer-card {
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.offer-card:hover {
+    transform: translateY(-7px) scale(1.01);
+    box-shadow:
+        0 20px 42px rgba(0, 0, 0, 0.13);
+}
+
+
+/* ---------- 17. CONTACT CARDS ---------- */
+
+.contact-detail-card {
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.contact-detail-card:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 15px 32px rgba(0, 0, 0, 0.11);
+}
+
+
+/* ---------- 18. SOCIAL ICONS ---------- */
+
+.social-link,
+.social-icon {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.social-link:hover,
+.social-icon:hover {
+    transform: translateY(-4px) scale(1.06);
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ---------- 19. FORM INPUT FOCUS ---------- */
+
+input,
+select,
+textarea {
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.25s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    transform: translateY(-1px);
+    box-shadow:
+        0 0 0 3px rgba(46, 125, 50, 0.10);
+}
+
+
+/* ---------- 20. LOGO MICRO ANIMATION ---------- */
+
+.logo img,
+.site-logo img {
+    transition:
+        transform 0.4s ease,
+        filter 0.4s ease;
+}
+
+.logo:hover img,
+.site-logo:hover img {
+    transform: scale(1.04);
+}
+
+
+/* ---------- 21. NAVIGATION ---------- */
+
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 70%;
+}
+
+
+/* ---------- 22. PAGE CARDS GLOW ---------- */
+
+.info-card,
+.about-card,
+.payment-card {
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.info-card:hover,
+.about-card:hover,
+.payment-card:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.11);
+}
+
+
+/* ---------- 23. WHATSAPP BUTTON ---------- */
+
+.whatsapp-button {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.whatsapp-button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.16);
+}
+
+
+/* ---------- 24. FLOATING WHATSAPP ---------- */
+
+.floating-whatsapp {
+    animation: whatsappFloat 3s ease-in-out infinite;
+}
+
+@keyframes whatsappFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+
+/* ---------- 25. IMAGE LOADING FEEL ---------- */
+
+img {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+
+/* ---------- 26. PREMIUM CARD BORDER LIGHT ---------- */
+
+.product-card,
+.feature-card,
+.offer-card,
+.step-card {
+    position: relative;
+}
+
+
+/* ---------- 27. SUBTLE CARD LIGHT SWEEP ---------- */
+
+.product-card::before,
+.feature-card::before,
+.offer-card::before,
+.step-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.16),
+        transparent
+    );
+    transform: skewX(-18deg);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.product-card:hover::before,
+.feature-card:hover::before,
+.offer-card:hover::before,
+.step-card:hover::before {
+    animation: cardLightSweep 0.9s ease;
+}
+
+@keyframes cardLightSweep {
+    from {
+        left: -100%;
+    }
+
+    to {
+        left: 150%;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE SAFETY
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .hero-image-card {
+        animation:
+            heroImageIn 0.8s ease 0.1s both,
+            heroFloat 6s ease-in-out 1s infinite;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .feature-card:hover,
+    .offer-card:hover,
+    .step-card:hover,
+    .delivery-card:hover {
+        transform: translateY(-4px);
+    }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY / REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+}
+/* =========================================================
+   SCROLL REVEAL
+   ========================================================= */
+
+.premium-reveal {
+    opacity: 0;
+    transform: translateY(25px);
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+}
+
+.premium-reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* =========================================================
+   STEP 4 — PREMIUM OFFER CARD EFFECT
+   ========================================================= */
+
+.offer-card {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.offer-card::before {
+    content: "";
+    position: absolute;
+    top: -60%;
+    left: -20%;
+    width: 140%;
+    height: 220%;
+    background: linear-gradient(
+        120deg,
+        transparent 42%,
+        rgba(255, 255, 255, 0.18) 50%,
+        transparent 58%
+    );
+    transform: translateX(-100%) rotate(8deg);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.offer-card:hover::before {
+    animation: offerShine 1s ease;
+}
+
+.offer-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes offerShine {
+    from {
+        transform: translateX(-100%) rotate(8deg);
+    }
+
+    to {
+        transform: translateX(100%) rotate(8deg);
+    }
+}
+
+.offer-card:hover {
+    transform: translateY(-9px) scale(1.015);
+}
+/* =========================================================
+   STEP 5 — PREMIUM NAVBAR EFFECT
+   ========================================================= */
+
+.nav-link {
+    position: relative;
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+}
+
+.nav-link:hover {
+    transform: translateY(-2px);
+    opacity: 1;
+}
+
+/* Animated underline */
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -7px;
+    width: 0;
+    height: 2px;
+    border-radius: 999px;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 75%;
+}
+
+/* Header slight depth */
+header,
+.navbar,
+.site-header {
+    transition:
+        box-shadow 0.35s ease,
+        background 0.35s ease;
+}
+/* =========================================================
+   STEP 6 — PREMIUM WHATSAPP FLOAT
+   ========================================================= */
+
+.floating-whatsapp {
+    position: relative;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* Soft pulse ring */
+.floating-whatsapp::before {
+    content: "";
+    position: absolute;
+    inset: -5px;
+    border-radius: inherit;
+    border: 2px solid currentColor;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.floating-whatsapp:hover {
+    transform: translateY(-5px) scale(1.06);
+}
+
+.floating-whatsapp:hover::before {
+    animation: whatsappPulse 1.2s ease-out infinite;
+}
+
+@keyframes whatsappPulse {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.35;
+    }
+
+    70% {
+        transform: scale(1.25);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1.25);
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .floating-whatsapp:hover::before {
+        animation: none;
+    }
+}
+/* =========================================================
+   STEP 7 — PREMIUM PRICE POP
+   ========================================================= */
+
+.product-card .product-price {
+    display: inline-block;
+    transition:
+        transform 0.3s ease,
+        text-shadow 0.3s ease;
+}
+
+.product-card:hover .product-price {
+    transform: scale(1.06);
+    text-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* Price unit stays calm */
+.product-card .product-price small,
+.product-card .product-price span {
+    transition: opacity 0.3s ease;
+}
+
+.product-card:hover .product-price small,
+.product-card:hover .product-price span {
+    opacity: 0.9;
+}
+/* =========================================================
+   STEP 8 — PREMIUM PRODUCT BADGES
+   ========================================================= */
+
+.product-badge,
+.badge,
+.product-tag,
+.ghee-types span {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+.product-badge:hover,
+.badge:hover,
+.product-tag:hover,
+.ghee-types span:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Soft shine */
+.product-badge,
+.badge,
+.product-tag {
+    position: relative;
+    overflow: hidden;
+}
+
+.product-badge::after,
+.badge::after,
+.product-tag::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        100deg,
+        transparent,
+        rgba(255, 255, 255, 0.35),
+        transparent
+    );
+    transform: skewX(-20deg);
+    pointer-events: none;
+}
+
+.product-badge:hover::after,
+.badge:hover::after,
+.product-tag:hover::after {
+    animation: badgeShine 0.8s ease;
+}
+
+@keyframes badgeShine {
+    from {
+        left: -120%;
+    }
+
+    to {
+        left: 140%;
+    }
+}
+/* =========================================================
+   STEP 9 — PREMIUM IMAGE HOVER
+   ========================================================= */
+
+.product-card .product-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card .product-image img {
+    transition:
+        transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+        filter 0.4s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.04);
+    filter: brightness(1.03) saturate(1.06);
+}
+
+/* Image soft overlay */
+.product-card .product-image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at 50% 40%,
+        rgba(255, 255, 255, 0.12),
+        transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.product-card:hover .product-image::before {
+    opacity: 1;
+}
+/* =========================================================
+   STEP 10 — PREMIUM BUTTON PRESS EFFECT
+   ========================================================= */
+
+.btn,
+button,
+.whatsapp-button,
+.primary-button,
+.secondary-button,
+.order-button,
+.subscribe-button {
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+}
+
+/* Hover */
+.btn:hover,
+button:hover,
+.whatsapp-button:hover,
+.primary-button:hover,
+.secondary-button:hover,
+.order-button:hover,
+.subscribe-button:hover {
+    filter: brightness(1.03);
+}
+
+/* Click / press */
+.btn:active,
+button:active,
+.whatsapp-button:active,
+.primary-button:active,
+.secondary-button:active,
+.order-button:active,
+.subscribe-button:active {
+    transform: translateY(2px) scale(0.97);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+/* =========================================================
+   STEP 11 — PREMIUM STAGGER ANIMATION
+   ========================================================= */
+
+.premium-reveal:nth-child(1) {
+    transition-delay: 0.05s;
+}
+
+.premium-reveal:nth-child(2) {
+    transition-delay: 0.12s;
+}
+
+.premium-reveal:nth-child(3) {
+    transition-delay: 0.19s;
+}
+
+.premium-reveal:nth-child(4) {
+    transition-delay: 0.26s;
+}
+
+.premium-reveal:nth-child(5) {
+    transition-delay: 0.33s;
+}
+
+.premium-reveal:nth-child(6) {
+    transition-delay: 0.40s;
+}
+
+
+/* Mobile: keep it fast */
+@media (max-width: 600px) {
+    .premium-reveal:nth-child(n) {
+        transition-delay: 0.05s;
+    }
+}
+/* =========================================================
+   STEP 12 — PREMIUM SECTION GLOW
+   ========================================================= */
+
+section {
+    position: relative;
+    isolation: isolate;
+}
+
+section::before {
+    content: "";
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    top: 10%;
+    left: -180px;
+    border-radius: 50%;
+    background: rgba(46, 125, 50, 0.045);
+    filter: blur(70px);
+    pointer-events: none;
+    z-index: -1;
+    transition:
+        transform 1s ease,
+        opacity 1s ease;
+}
+
+section:hover::before {
+    transform: translateX(40px);
+    opacity: 1.4;
+}
+
+
+/* Alternate glow on right side */
+section:nth-of-type(even)::before {
+    left: auto;
+    right: -180px;
+}
+
+section:nth-of-type(even):hover::before {
+    transform: translateX(-40px);
+}
+
+
+/* Mobile safety */
+@media (max-width: 600px) {
+    section::before {
+        width: 180px;
+        height: 180px;
+        filter: blur(55px);
+    }
+}
+/* =========================================================
+   STEP 13 — SCROLL PROGRESS BAR
+   ========================================================= */
+
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        #2e7d32,
+        #66bb6a,
+        #a5d6a7
+    );
+    z-index: 99999;
+    pointer-events: none;
+    transition: width 0.08s linear;
+    box-shadow: 0 0 8px rgba(46, 125, 50, 0.35);
+}
+/* =========================================================
+   STEP 15 — PREMIUM BACK TO TOP
+   ========================================================= */
+
+#back-to-top {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 46px;
+    height: 46px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 700;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    z-index: 9998;
+}
+
+#back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#back-to-top:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.16);
+}
+
+#back-to-top:active {
+    transform: scale(0.94);
+}
+
+@media (max-width: 600px) {
+    #back-to-top {
+        right: 16px;
+        bottom: 16px;
+        width: 42px;
+        height: 42px;
+        font-size: 20px;
+    }
+}
+/* =========================================================
+   STEP 16 — HERO FLOATING CARD
+   ========================================================= */
+
+.hero-floating-card {
+    animation: premiumFloatingCard 4s ease-in-out infinite;
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.hero-floating-card:hover {
+    animation-play-state: paused;
+    transform: translateY(-6px) scale(1.02);
+    box-shadow:
+        0 16px 35px rgba(0, 0, 0, 0.14);
+}
+
+@keyframes premiumFloatingCard {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-floating-card {
+        animation: none;
+    }
+}
+/* =========================================================
+   STEP 17 — PREMIUM PRODUCT ORDER BUTTON
+   ========================================================= */
+
+.product-order-button {
+    position: relative;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        filter 0.3s ease;
+}
+
+.product-order-button:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.04);
+    box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.14);
+}
+
+.product-order-button:active {
+    transform: translateY(1px) scale(0.98);
+}
+/* =========================================================
+   STEP 18 — PREMIUM ABOUT / OWNER EFFECT
+   ========================================================= */
+
+.about-image {
+    overflow: hidden;
+    border-radius: inherit;
+}
+
+.about-image img {
+    transition:
+        transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+        filter 0.5s ease;
+}
+
+.about-image:hover img {
+    transform: scale(1.035);
+    filter: brightness(1.03) saturate(1.04);
+}
+
+
+/* Founder box */
+.owner-box {
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.owner-box:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.11);
+}
+
+
+/* About tags */
+.about-tags span {
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.about-tags span:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 7px 16px rgba(0, 0, 0, 0.10);
+}
+
+
+/* Mobile safety */
+@media (max-width: 600px) {
+    .about-image:hover img {
+        transform: scale(1.015);
+    }
+}
+/* =========================================================
+   STEP 19 — PREMIUM SUBSCRIPTION RESULT
+   ========================================================= */
+
+.result-card {
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.result-card:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+.result-card strong {
+    display: inline-block;
+    transition:
+        transform 0.3s ease;
+}
+
+.result-card:hover strong {
+    transform: scale(1.05);
+}
+
+
+/* Soft shine */
+.result-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(
+        100deg,
+        transparent,
+        rgba(255, 255, 255, 0.20),
+        transparent
+    );
+    transform: skewX(-18deg);
+    pointer-events: none;
+}
+
+.result-card:hover::after {
+    animation: resultCardShine 0.9s ease;
+}
+
+@keyframes resultCardShine {
+    from {
+        left: -120%;
+    }
+
+    to {
+        left: 140%;
+    }
+}
+/* =========================================================
+   STEP 20 — MOBILE SAFETY + FINAL POLISH
+   ========================================================= */
+
+/* Prevent accidental horizontal movement */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+
+/* Keep hover effects lighter on touch devices */
+@media (hover: none) and (pointer: coarse) {
+
+    .product-card:hover,
+    .feature-card:hover,
+    .offer-card:hover,
+    .step-card:hover,
+    .delivery-card:hover,
+    .contact-detail-card:hover {
+        transform: none;
+    }
+
+    .product-card:hover .product-image img,
+    .about-image:hover img,
+    .bottle-image:hover img {
+        transform: none;
+        filter: none;
+    }
+
+    .product-card:hover::before,
+    .feature-card:hover::before,
+    .offer-card:hover::before,
+    .step-card:hover::before {
+        animation: none;
+    }
+
+    .product-card:hover .product-image::after {
+        animation: none;
+    }
+
+    .offer-card:hover::before {
+        animation: none;
+    }
+
+}
+
+
+/* Smaller screens */
+@media (max-width: 480px) {
+
+    .premium-reveal {
+        transform: translateY(15px);
+        transition:
+            opacity 0.55s ease,
+            transform 0.55s ease;
+    }
+
+    .product-card:hover {
+        transform: none;
+    }
+
+    .feature-card:hover,
+    .offer-card:hover,
+    .step-card:hover,
+    .delivery-card:hover {
+        transform: none;
+    }
+
+    #back-to-top {
+        right: 14px;
+        bottom: 14px;
+    }
+
+}
+
+
+/* Final reduced-motion safety */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+}
+/* =========================================
+   OWNER INSTAGRAM CARD
+========================================= */
+
+.owner-instagram {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: fit-content;
+    max-width: 100%;
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(20, 70, 45, 0.12);
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(20, 50, 35, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.owner-instagram:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 35px rgba(20, 50, 35, 0.13);
+}
+
+.owner-instagram-icon {
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: #f4efe4;
+    color: var(--green-800);
+}
+
+.owner-instagram-icon svg {
+    width: 25px;
+    height: 25px;
+}
+
+.owner-instagram-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+}
+
+.owner-instagram-text span {
+    font-size: 12px;
+    color: #6b756f;
+    margin-bottom: 2px;
+}
+
+.owner-instagram-text strong {
+    font-size: 15px;
+    color: var(--green-800);
+}
+
+.owner-instagram-text small {
+    margin-top: 3px;
+    font-size: 11px;
+    color: #7b847f;
+}
+
+.owner-instagram-link {
+    margin-left: 8px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: var(--green-800);
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.owner-instagram-link:hover {
+    background: var(--green-900);
+    transform: translateY(-1px);
+}
+
+.owner-instagram-link span {
+    margin-left: 4px;
+}
+
+
+/* Mobile */
+@media (max-width: 600px) {
+    .owner-instagram {
+        width: 100%;
+        padding: 11px;
+        gap: 10px;
+        border-radius: 16px;
+    }
+
+    .owner-instagram-icon {
+        width: 42px;
+        height: 42px;
+        flex-basis: 42px;
+    }
+
+    .owner-instagram-text strong {
+        font-size: 13px;
+    }
+
+    .owner-instagram-text small {
+        font-size: 10px;
+    }
+
+    .owner-instagram-link {
+        margin-left: auto;
+        padding: 9px 11px;
+        font-size: 11px;
+    }
+
+    /* =========================================
+   OWNER INSTAGRAM - HERO
+========================================= */
+
+.owner-instagram {
+    margin-top: 22px;
+    width: 100%;
+    max-width: 470px;
+}
+
+.owner-instagram-profile {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    width: 100%;
+    padding: 11px 13px;
+    box-sizing: border-box;
+
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(20, 70, 45, 0.12);
+    border-radius: 16px;
+
+    text-decoration: none;
+    box-shadow: 0 8px 25px rgba(20, 50, 35, 0.07);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.owner-instagram-profile:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(20, 50, 35, 0.12);
+    border-color: rgba(20, 70, 45, 0.22);
+}
+
+
+/* Instagram icon */
+
+.instagram-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+    background: #faf6ed;
+}
+
+.instagram-icon svg {
+    width: 25px;
+    height: 25px;
+}
+
+
+/* Text */
+
+.owner-instagram-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.25;
+}
+
+.owner-instagram-text span {
+    font-size: 11px;
+    color: #7a837d;
+    margin-bottom: 3px;
+}
+
+.owner-instagram-text strong {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--green-800);
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.owner-instagram-text small {
+    margin-top: 3px;
+    font-size: 10.5px;
+    color: #8a928d;
+}
+
+
+/* Arrow */
+
+.instagram-arrow {
+    margin-left: auto;
+
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: var(--green-800);
+    color: white;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.owner-instagram-profile:hover .instagram-arrow {
+    transform: translate(2px, -2px);
+    background: var(--green-900);
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .owner-instagram {
+        max-width: 100%;
+        margin-top: 18px;
+    }
+
+    .owner-instagram-profile {
+        padding: 10px;
+        gap: 10px;
+        border-radius: 14px;
+    }
+
+    .instagram-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+    }
+
+    .instagram-icon svg {
+        width: 23px;
+        height: 23px;
+    }
+
+    .owner-instagram-text strong {
+        font-size: 13px;
+    }
+
+    .owner-instagram-text small {
+        font-size: 9.5px;
+    }
+
+    .instagram-arrow {
+        width: 29px;
+        height: 29px;
+        min-width: 29px;
+        font-size: 15px;
+    }
+}
+/* =========================================
+   OWNER INSTAGRAM - COMPACT HERO CARD
+========================================= */
+
+.owner-instagram {
+    margin-top: 22px;
+    width: 100%;
+    max-width: 430px;
+}
+
+.owner-instagram-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 10px 12px;
+    box-sizing: border-box;
+
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(20, 70, 45, 0.10);
+    border-radius: 15px;
+
+    text-decoration: none;
+    box-shadow: 0 7px 22px rgba(20, 50, 35, 0.06);
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.owner-instagram-profile:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(20, 50, 35, 0.10);
+}
+
+
+/* Instagram icon */
+
+.instagram-icon {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+    background: #faf6ed;
+}
+
+.instagram-icon svg {
+    width: 27px;
+    height: 27px;
+}
+
+
+/* Text */
+
+.owner-instagram-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1;
+    line-height: 1.2;
+}
+
+.owner-instagram-text span {
+    font-size: 10px;
+    color: #7a837d;
+    margin-bottom: 3px;
+}
+
+.owner-instagram-text strong {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--green-800);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.owner-instagram-text small {
+    margin-top: 3px;
+    font-size: 10px;
+    color: #8a928d;
+}
+
+
+/* Arrow */
+
+.instagram-arrow {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: var(--green-800);
+    color: #fff;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.owner-instagram-profile:hover .instagram-arrow {
+    transform: translate(2px, -2px);
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .owner-instagram {
+        max-width: 100%;
+        margin-top: 18px;
+    }
+
+    .owner-instagram-profile {
+        gap: 9px;
+        padding: 9px 10px;
+        border-radius: 13px;
+    }
+
+    .instagram-icon {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+    }
+
+    .instagram-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .owner-instagram-text strong {
+        font-size: 12px;
+    }
+
+    .owner-instagram-text small {
+        font-size: 9px;
+    }
+
+    .instagram-arrow {
+        width: 27px;
+        height: 27px;
+        min-width: 27px;
+        font-size: 14px;
+    }
+}
+
+/* ================================
+   PREMIUM HERO ANIMATION
+   ================================ */
+
+.hero-content {
+    animation: heroContentIn 0.9s ease-out both;
+}
+
+.hero-image,
+.hero-visual {
+    animation: heroImageIn 1s ease-out 0.15s both;
+}
+
+@keyframes heroContentIn {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroImageIn {
+    from {
+        opacity: 0;
+        transform: translateX(45px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+/* =========================================================
+   JHALAWAR ORGANIC MILK — PREMIUM ANIMATIONS
+   ========================================================= */
+
+/* ---------- 1. HERO ENTRANCE ---------- */
+
+.hero-content {
+    animation: heroContentIn 0.9s ease-out both;
+}
+
+.hero-image,
+.hero-visual {
+    animation: heroImageIn 1s ease-out 0.15s both;
+}
+
+@keyframes heroContentIn {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroImageIn {
+    from {
+        opacity: 0;
+        transform: translateX(45px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+
+/* ---------- 2. PRODUCT CARD PREMIUM HOVER ---------- */
+
+.product-card {
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14);
+}
+
+
+/* ---------- 3. PRODUCT IMAGE ZOOM ---------- */
+
+.product-card img {
+    transition:
+        transform 0.5s ease,
+        filter 0.5s ease;
+}
+
+.product-card:hover img {
+    transform: scale(1.08);
+}
+
+
+/* ---------- 4. BUTTON PREMIUM HOVER ---------- */
+
+button,
+.btn,
+a[class*="btn"] {
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+button:hover,
+.btn:hover,
+a[class*="btn"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.14);
+}
+
+button:active,
+.btn:active,
+a[class*="btn"]:active {
+    transform: translateY(0) scale(0.97);
+}
+
+
+/* ---------- 5. WHATSAPP BUTTON PULSE ---------- */
+
+.whatsapp-button,
+.whatsapp-float,
+.whatsapp-btn {
+    animation: whatsappPulse 2.2s infinite;
+}
+
+@keyframes whatsappPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.35);
+    }
+
+    70% {
+        box-shadow: 0 0 0 12px rgba(37, 211, 102, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
+
+/* ---------- 6. GHEE VARIANT HOVER ---------- */
+
+.ghee-types span {
+    cursor: pointer;
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease;
+}
+
+.ghee-types span:hover {
+    transform: translateY(-2px);
+}
+
+.ghee-types span.active {
+    color: var(--white);
+    background: var(--green-800);
+}
+
+
+/* ---------- 7. OFFER / INFO CARDS ---------- */
+
+.offer-card,
+.feature-card,
+.benefit-card,
+.trust-card {
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.offer-card:hover,
+.feature-card:hover,
+.benefit-card:hover,
+.trust-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ---------- 8. BANNER IMAGE EFFECT ---------- */
+
+.brand-banner img,
+.delivery-banner img {
+    transition:
+        transform 0.6s ease,
+        filter 0.6s ease;
+}
+
+.brand-banner:hover img,
+.delivery-banner:hover img {
+    transform: scale(1.03);
+}
+
+
+/* ---------- 9. NAVIGATION HOVER ---------- */
+
+nav a {
+    position: relative;
+    transition: color 0.25s ease;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+    background: currentColor;
+}
+
+nav a:hover::after {
+    width: 70%;
+}
+
+
+/* ---------- 10. LOGO MICRO ANIMATION ---------- */
+
+.logo img,
+.logo-image {
+    transition:
+        transform 0.35s ease;
+}
+
+.logo:hover img,
+.logo:hover .logo-image {
+    transform: scale(1.05) rotate(-1deg);
+}
+
+
+/* ---------- 11. PAYMENT QR HOVER ---------- */
+
+.payment-section img[src*="payment-qr"] {
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.payment-section img[src*="payment-qr"]:hover {
+    transform: scale(1.04);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ---------- 12. INPUT FOCUS ANIMATION ---------- */
+
+input,
+select,
+textarea {
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    transform: translateY(-1px);
+}
+
+
+/* ---------- 13. IMAGE FLOATING EFFECT ---------- */
+
+.hero-image img,
+.hero-visual img {
+    animation: gentleFloat 4s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* ---------- 14. SECTION TITLE ---------- */
+
+section h2 {
+    transition:
+        transform 0.3s ease;
+}
+
+section h2:hover {
+    transform: translateY(-2px);
+}
+
+
+/* ---------- 15. REDUCE ANIMATION FOR ACCESSIBILITY ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+
+/* ---------- 16. MOBILE SAFETY ---------- */
+
+@media (max-width: 768px) {
+    .product-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .product-card:hover img {
+        transform: scale(1.04);
+    }
+
+    button:hover,
+    .btn:hover,
+    a[class*="btn"]:hover {
+        transform: translateY(-2px);
+    }
+}
